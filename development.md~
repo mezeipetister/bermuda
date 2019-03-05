@@ -25,3 +25,11 @@ Received time: Date,
 Archived time: Date,
 Due date: Date,
 Folder: Int
+
+## Backlog
+
+| InProgress | Planning                                                    | Blocking | Review | Done |
+|------------|-------------------------------------------------------------|----------|--------|------|
+|            | Create ~/.bermuda folder if doesnot exist as initialisatio. |          |        |      |
+|            |                                                             |          |        |      |
+|            |                                                             |          |        |      |
