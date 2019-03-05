@@ -28,13 +28,13 @@ Folder: Int
 
 ## Backlog
 
-| Planning                                                     | InProgress                                                        | Blocking | Review | Done |
-|--------------------------------------------------------------+-------------------------------------------------------------------+----------+--------+------|
-|                                                              | Init process[^3]                                                  |          |        |      |
-|                                                              | Create ~/.bermuda folder if does not exist as initialisation[^2]. |          |        |      |
-| File read library by (path, extension) -> File path list[^4] |                                                                   |          |        |      |
-| File write library (content, path(by extension))[^5]         |                                                                   |          |        |      |
-| CLI basics[^6]                                               |                                                                   |          |        |      |
+| Planning                                                     | InProgress | Blocking | Review                                                            | Done |
+|--------------------------------------------------------------+------------+----------+-------------------------------------------------------------------+------|
+|                                                              |            |          | Init process[^3]                                                  |      |
+|                                                              |            |          | Create ~/.bermuda folder if does not exist as initialisation[^2]. |      |
+| File read library by (path, extension) -> File path list[^4] |            |          |                                                                   |      |
+| File write library (content, path(by extension))[^5]         |            |          |                                                                   |      |
+| CLI basics[^6]                                               |            |          |                                                                   |      |
 
 [^2]: Initial process
 
