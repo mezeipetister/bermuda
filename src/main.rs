@@ -1,26 +1,39 @@
 extern crate dirs;
 
 use std::fs;
-use std::path::Path;
-use std::ffi::OsString;
+use std::fs::File;
+use std::io;
+use std::io::prelude::*;
 
 fn main() {
-    init();
-    get_files_from_dir(format!("{}/Documents",get_home_path()));
+    //init();
+    let mut file = create_file(&format!("{}/Desktop/demo.csv", get_home_path())).unwrap();
+    file.write_all(b"Hello World!!!!")
+        .expect("Error while writing file!");
+    let mut file = File::open(&format!("{}/Desktop/demo.csv", get_home_path())).unwrap();
+    let content = read_file_to_string(&mut file).expect("Error while reading file to string... Ooo.");
+    println!("Content is: {}",content);
+    //get_files_from_dir(&format!("{}/Documents", get_home_path()));
 }
 
 /// Init process
 /// Only run once at startup
 fn init() {
-    // Create ~/.bermuda/data folder if does not exist
-    create_folder_by_path(format!("{}/.bermuda/data", get_home_path()));
+    // let data_path = format!("{}/.bermuda/data/", get_home_path());
+    // // Create ~/.bermuda/data folder if does not exist
+    // create_folder_by_path(&data_path);
+    // let file_path = File::create("~/Desktop/demo.txt");
+    // write_string_to_file(&mut file_path.unwrap(), b"Hello World!")
+    //     .expect("Ooo error during file write.");
+    // let c = read_file_to_string(&data_path).expect("Error occured during file read.");
+    // println!("File content: {}", c);
 }
 
 /// Create folder by path
 /// Give a path and create a folder with sub folders
 /// If the folder exists then it wont replace it!
 /// TODO: use result! Refact!
-fn create_folder_by_path(path: String) {
+fn create_folder_by_path(path: &String) {
     match fs::create_dir_all(path) {
         Err(why) => panic!("OOoo Error occured! Why?: {}", why),
         Ok(()) => println!("Ok!"),
@@ -40,9 +53,27 @@ fn get_home_path() -> String {
     }
 }
 
-fn get_files_from_dir(dir: String) {
+fn get_files_from_dir(dir: &String) {
     let paths = fs::read_dir(dir).unwrap();
     for path in paths {
         println!("Name: {}", path.unwrap().path().display());
     }
+}
+
+/// Read file to string
+fn read_file_to_string(file: &mut File) -> Result<String, io::Error> {
+    let mut content = String::new();
+    file.read_to_string(&mut content)?;
+    Ok(content)
+}
+
+/// Write string to file
+fn write_string_to_file(path: &mut File, content: &[u8]) -> std::io::Result<()> {
+    // fs::write(path, content)
+    path.write(content)?;
+    Ok(())
+}
+
+fn create_file(file_path: &String) -> io::Result<File> {
+    File::create(file_path)
 }
