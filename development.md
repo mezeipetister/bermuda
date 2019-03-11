@@ -19,12 +19,12 @@ ID is going to be the file archive timestamp.
 
 Information card yaml
 
-Document name: String,
-Document description: String,
-Received time: Date,
-Archived time: Date,
-Due date: Date,
-Folder: Int
+Document name: String,  
+Document description: String,  
+Received time: Date,  
+Archived time: Date,  
+Due date: Date,  
+Folder: Int  
 
 ## Backlog
 
