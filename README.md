@@ -1,2 +1,2 @@
 # bermuda (copyright 2019)
-Bermoda document management
+Bermuda document management
