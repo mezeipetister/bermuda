@@ -29,6 +29,7 @@ Folder: Int
 ## Backlog
 
 | Planning | InProgress | Blocking | Review | Done | Description                                                       |
+|----------|------------|----------|--------|------|-------------------------------------------------------------------|
 | x        |            |          |        |      | Demo task, lets see what happens.                                 |
 |          |            |          | x      |      | Init process[^3]                                                  |
 |          |            |          | x      |      | Create ~/.bermuda folder if does not exist as initialisation[^2]. |
@@ -36,6 +37,7 @@ Folder: Int
 | x        |            |          |        |      | File write library (content, path(by extension))[^5]              |
 | x        |            |          |        |      | CLI basics[^6]                                                    |
 |          |            |          |        |      |                                                                   |
+
 
 [^2]: Initial process
 
