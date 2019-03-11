@@ -11,8 +11,9 @@ fn main() {
     file.write_all(b"Hello World!!!!")
         .expect("Error while writing file!");
     let mut file = File::open(&format!("{}/Desktop/demo.csv", get_home_path())).unwrap();
-    let content = read_file_to_string(&mut file).expect("Error while reading file to string... Ooo.");
-    println!("Content is: {}",content);
+    let content =
+        read_file_to_string(&mut file).expect("Error while reading file to string... Ooo.");
+    println!("Content is: {}", content);
     //get_files_from_dir(&format!("{}/Documents", get_home_path()));
 }
 
