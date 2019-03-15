@@ -15,7 +15,7 @@ pub struct Doc {
 
 impl Doc {
     pub fn new() -> Self {
-        let id = "ID".to_string();
+        let id = crate::get_timestamp();
         _create_file(&id, &"".to_string());
         Doc {
             id: id,
