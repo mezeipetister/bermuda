@@ -1,3 +1,15 @@
+# TOC
+
+[Models](./docs/models.md)
+
+Ideas:
+
+- Mi lenne ha saját háttérben futó appot tennénk a kliens gépekre, amik SMB hálózati mappában ellenőriznék,  
+a saját md kartonjainkat. Minden fontos infót md kartonra tennénk, így egy mappában lenne egy md karton,  
+ami tartalmazná a szükséges fileokat, belinkelve, a feladatokat és a változás logokat. Kérdéses, hogy egy online  
+felület a hatékonyabb, vagy smb szinten a konkrét file, mappa munka. Bár itt kérdéses a jogosultság, ha nincs pl.:  
+céges domain. Vagy az elnevezés konvenciók eltérései, Windows, Unix, Linux.
+
 # 0.1.0
 
 Goal
@@ -30,11 +42,11 @@ Folder: Int
 
 | Description                                                       | Planning | InProgress | Blocking | Review | Done |
 |-------------------------------------------------------------------|----------|------------|----------|--------|------|
-| Demo task, lets see what happens.                                 | x        |            |          |        |      |
+| Demo task, lets see what happens.                                 |          |            |          |        | x    |
 | Init process[^3]                                                  |          | x          |          |        |      |
-| Create ~/.bermuda folder if does not exist as initialisation[^2]. |          | x          |          |        |      |
+| Create ~/.bermuda folder if does not exist as initialisation[^2]. |          |            |          | x      |      |
+| File write library (content, path(by extension))[^5]              |          | x          |          |        |      |
 | File read library by (path, extension) -> File path list[^4]      | x        |            |          |        |      |
-| File write library (content, path(by extension))[^5]              | x        |            |          |        |      |
 | CLI basics[^6]                                                    | x        |            |          |        |      |
 |                                                                   |          |            |          |        |      |
 
