@@ -16,7 +16,7 @@ pub struct Doc {
 impl Doc {
     pub fn new() -> Self {
         let id = crate::get_timestamp();
-        _create_file(&id, &"".to_string());
+        _create_file(&id, &"".to_string()).unwrap();
         Doc {
             id: id,
             title: "".to_string(),
@@ -27,7 +27,7 @@ impl Doc {
         _create_file(
             &self.id,
             &serde_yaml::to_string(self).expect("Error writing string to file!"),
-        );
+        ).unwrap();
         Ok("Ok".to_string())
     }
     pub fn get_id(&self) -> &String {

@@ -55,7 +55,7 @@ pub fn get_home_path() -> Option<path::PathBuf> {
     dirs::home_dir()
 }
 
-fn get_files_from_dir(dir: &Path) {
+pub fn get_files_from_dir(dir: &Path) -> Vec<String> {
     if dir.is_dir() {
         let names = fs::read_dir(dir)
             .expect("Error during reading folder..")
@@ -67,12 +67,13 @@ fn get_files_from_dir(dir: &Path) {
                 })
             })
             .collect::<Vec<String>>();
-        println!("{:?}", names);
+        return names;
     }
+    Vec::new()
 }
 
 /// Read file to string
-fn read_file_to_string(file: &mut File) -> Result<String, io::Error> {
+pub fn read_file_to_string(file: &mut File) -> Result<String, io::Error> {
     let mut content = String::new();
     file.read_to_string(&mut content)?;
     Ok(content)
@@ -85,6 +86,7 @@ pub fn write_string_to_file(path: &mut File, content: &[u8]) -> std::io::Result<
     Ok(())
 }
 
+/// Create file by path
 pub fn create_file(file_path: &Path) -> io::Result<File> {
     File::create(file_path)
 }
