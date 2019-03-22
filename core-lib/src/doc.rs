@@ -1,7 +1,7 @@
 // Document store
 
 use crate::files::*;
-use crate::serde_yaml::*;
+// use crate::serde_yaml::*;
 // use std::fs::File; TODO: Remove it!
 use std::io;
 // use std::path::Path; TODO: Remove it!
@@ -48,9 +48,8 @@ impl Doc {
     }
 
     /// Set title, returns Result
-    pub fn set_title(&mut self, new_title: String) -> Result<()> {
+    pub fn set_title(&mut self, new_title: String) {
         self.title = new_title;
-        Ok(())
     }
     
     /// Get description as string
@@ -59,9 +58,8 @@ impl Doc {
     }
 
     /// Set desciption and return result
-    pub fn set_description(&mut self, new_description: String) -> Result<()> {
+    pub fn set_description(&mut self, new_description: String) {
         self.description = new_description;
-        Ok(())
     }
 }
 

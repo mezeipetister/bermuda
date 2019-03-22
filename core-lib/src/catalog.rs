@@ -42,7 +42,7 @@ pub fn init() -> Catalog {
     let path = get_home_path().unwrap().join(".bermuda").join("catalogs");
 
     // Check and create home directory
-    create_folder_by_path(&path);
+    create_folder_by_path(&path).expect("Error while creating folder!");
 
     for file_name in get_files_from_dir(&path) {
         // Get file from a given file name
