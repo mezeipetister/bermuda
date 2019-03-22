@@ -7,7 +7,7 @@ use std::io;
 // use std::path::Path; TODO: Remove it!
 
 /// Doc struct
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize, Clone)]
 pub struct Doc {
     id: String,
     title: String,
@@ -38,8 +38,8 @@ impl Doc {
     }
 
     /// Get id as string
-    pub fn get_id(&self) -> &String {
-        &self.id
+    pub fn get_id(&self) -> String {
+        self.id.clone()
     }
 
     /// Get title as string
