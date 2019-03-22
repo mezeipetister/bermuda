@@ -1,24 +1,38 @@
-extern crate iron;
-extern crate router;
+#![feature(proc_macro_hygiene, decl_macro)]
 
-use iron::prelude::*;
-use iron::status;
-use router::Router;
+#[macro_use]
+extern crate rocket;
+
+extern crate core_lib;
+use core_lib::{catalog, doc};
+use rocket::State;
+use std::sync::Mutex;
+
+#[get("/")]
+fn index(catalog: State<C>) -> String {
+    let mut _catalog = catalog.inner().catalog.lock().unwrap();
+    format!("Document number is: {}", _catalog.get_documents_number())
+}
+
+#[get("/add")]
+fn add(catalog: State<C>) -> String {
+    let mut new_doc = doc::Doc::new();
+    new_doc.save();
+    let mut _catalog = catalog.inner().catalog.lock().unwrap();
+    _catalog.add_document_to_catalog(new_doc);
+    format!("Ok!")
+}
+
+struct C {
+    catalog: Mutex<catalog::Catalog>,
+}
 
 fn main() {
-    let mut router = Router::new();           // Alternative syntax:
-    router.get("/", handler, "index");        // let router = router!(index: get "/" => handler,
-    router.get("/:query", handler, "query");  //                      query: get "/:query" => handler);
-    router.get("/api/hello", hello_handler, "");
-
-    Iron::new(router).http("localhost:3000").unwrap();
-
-    fn handler(req: &mut Request) -> IronResult<Response> {
-        let ref query = req.extensions.get::<Router>().unwrap().find("query").unwrap_or("/");
-        Ok(Response::with((status::Ok, *query)))
-    }
-
-    fn hello_handler(_req: &mut Request) -> IronResult<Response> {
-        Ok(Response::with((status::Ok, "Hello World")))
-    }
+    let c = C {
+        catalog: Mutex::new(catalog::init()),
+    };
+    rocket::ignite()
+        .manage(c)
+        .mount("/", routes![index, add])
+        .launch();
 }

@@ -30,13 +30,14 @@ impl Catalog {
 
     /// Get Document by id
     /// Returns a result
+    /// TODO: Check error handling!
     pub fn get_document_by_id(&self, id: String) -> Doc {
-        let index = self
+        self.documents[self
             .documents
             .iter()
             .position(|doc| doc.get_id().clone() == id)
-            .unwrap();
-        return self.documents[index].clone();
+            .unwrap()]
+        .clone()
     }
 }
 
