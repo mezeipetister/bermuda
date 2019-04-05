@@ -1,4 +1,4 @@
-// View Index
+// View Add Document
 
 use crate::catalog::Catalog;
 use crate::views::Widget;
@@ -14,16 +14,13 @@ pub struct Model {
 }
 
 impl Model {
-    pub fn new(catalog: &Catalog) -> Self {
+    pub fn new() -> Self {
         let mut model = Model {
             title: String::new(),
             css: String::new(),
             js: String::new(),
             documents: Vec::new(),
         };
-
-        // TODO: This is expensive! Solve it!
-        model.documents = catalog.get_documents().clone();
 
         model.add_css(format!(" html, body {{margin:0; padding:0;}}"));
         model.add_css(include_str!("../../assets/bootstrap.min.css").to_string());
@@ -45,24 +42,13 @@ impl Model {
 
     pub fn set_title(&mut self, title: String) -> &Self {
         self.title = title;
+
         self
     }
 }
 
 impl Widget for Model {
     fn render(&self) -> String {
-        let mut docs_list = String::new();
-
-        for doc in &self.documents {
-            let title = doc.get_title().clone();
-            let id = doc.get_id().clone();
-            docs_list.push_str(&format!(
-                "<li><a href=\"/document/{id}\">{doc_title}</a></li>",
-                id = id,
-                doc_title = title
-            ));
-        }
-
         format!(
             "<!DOCTYPE html>
 		<html>
@@ -74,7 +60,20 @@ impl Widget for Model {
 			<div class=\"container\">
 			    {navbar}
 			    <div class=\"row\">
-				<ul>{docs_list}</ul>
+				<div class=\"col-sm\">
+				    <form method=\"POST\">
+					<div class=\"form-group\">
+					    <label for=\"title\">Documentum title</label>
+					    <input type=\"text\" class=\"form-control\" id=\"title\" name=\"title\" aria-describedby=\"documentTitle\" placeholder=\"Enter document title\">
+					    <!-- <small id=\"emailHelp\" class=\"form-text text-muted\">We'll never share your email with anyone else.</small> -->
+					</div>
+					<div class=\"form-group\">
+					    <label for=\"description\">Description</label>
+					    <input type=\"text\" class=\"form-control\" name=\"description\" id=\"description\" placeholder=\"Document description\">
+					</div>
+					<button type=\"submit\" class=\"btn btn-primary\">Submit</button>
+				    </form>
+				</div>
 			    </div>
 			</div>
 			<script>{js}</script>
@@ -84,7 +83,6 @@ impl Widget for Model {
             css = self.css,
             js = self.js,
             navbar = widget_navbar::Model::new().render(),
-            docs_list = docs_list,
         )
     }
 }
