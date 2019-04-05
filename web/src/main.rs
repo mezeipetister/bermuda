@@ -1,8 +1,7 @@
 #![feature(proc_macro_hygiene, decl_macro, plugin)]
 
-pub mod widgets;
-pub mod templater;
 pub mod views;
+pub mod widgets;
 
 #[macro_use]
 extern crate rocket;
@@ -14,34 +13,62 @@ use rocket::response::content;
 use rocket::State;
 use std::sync::Mutex;
 
-use widgets::Widgets;
-use views::Html;
+use crate::views::Widget;
+use crate::widgets::*;
 
 #[get("/")]
 fn index(_c: State<View>) -> content::Html<String> {
-    content::Html(_c.inner().views.lock().unwrap().demo_document_plain_view())
+    let mut a = view_index::Model::new();
+    a.set_title("Bermuda".to_string());
+    content::Html(a.render())
+    // content::Html(_c.inner().views.lock().unwrap().demo_document_plain_view())
 }
 
-#[get("/add")]
-fn add(_c: State<View>) -> content::Html<String> {
-    content::Html(_c.inner().views.lock().unwrap().demo_add_new_document())
+#[get("/about")]
+fn about(_c: State<View>) -> content::Html<String> {
+    let mut a = view_about::Model::new();
+    a.set_title("Bermuda".to_string());
+    content::Html(a.render())
+    // content::Html(_c.inner().views.lock().unwrap().demo_document_plain_view())
+}
+
+#[get("/today")]
+fn today(_c: State<View>) -> content::Html<String> {
+    let mut a = view_index::Model::new();
+    a.set_title("Bermuda".to_string());
+    content::Html(a.render())
+    // content::Html(_c.inner().views.lock().unwrap().demo_document_plain_view())
+}
+
+#[get("/documents")]
+fn documents(_c: State<View>) -> content::Html<String> {
+    let mut a = view_documents::Model::new(&_c.inner().models.lock().unwrap());
+    a.set_title("Bermuda".to_string());
+    content::Html(a.render())
+    // content::Html(_c.inner().views.lock().unwrap().demo_document_plain_view())
+}
+
+#[get("/folders")]
+fn folders(_c: State<View>) -> content::Html<String> {
+    let mut a = view_index::Model::new();
+    a.set_title("Bermuda".to_string());
+    content::Html(a.render())
+    // content::Html(_c.inner().views.lock().unwrap().demo_document_plain_view())
 }
 
 struct View {
-    views: Mutex<Html>,
+    models: Mutex<catalog::Catalog>,
 }
 
 fn main() {
     let catalog = catalog::init();
-    let widgets = Widgets::new(catalog);
-    let views = Html::new();
 
     let c = View {
-        views: Mutex::new(views),
+        models: Mutex::new(catalog),
     };
 
     rocket::ignite()
         .manage(c)
-        .mount("/", routes![index, add])
+        .mount("/", routes![index, today, about, documents, folders])
         .launch();
 }
