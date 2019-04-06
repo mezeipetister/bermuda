@@ -13,18 +13,19 @@ use core_lib::doc;
 use rocket::request::Form;
 use rocket::response::content;
 use rocket::response::Redirect;
+use rocket::response::status::NotFound;
+use rocket::response::NamedFile;
+use rocket::Data;
 use rocket::State;
+use std::io;
 use std::sync::Mutex;
 
 use crate::views::Widget;
 use crate::widgets::*;
 
 #[get("/")]
-fn index(_c: State<View>) -> content::Html<String> {
-    let mut a = view_index::Model::new();
-    a.set_title("Bermuda".to_string());
-    content::Html(a.render())
-    // content::Html(_c.inner().views.lock().unwrap().demo_document_plain_view())
+fn index(_c: State<View>) -> Redirect {
+    Redirect::to("/documents")
 }
 
 #[get("/about")]
@@ -60,6 +61,16 @@ fn document(_c: State<View>, id: String) -> content::Html<String> {
     // content::Html(_c.inner().views.lock().unwrap().demo_document_plain_view())
 }
 
+#[get("/file/<id>")]
+fn get_file(_c: State<View>, id: String) -> Result<NamedFile, NotFound<String>> {
+    let path = core_lib::files::get_home_path()
+        .unwrap()
+        .join(".bermuda")
+        .join("files")
+        .join(format!("{}.pdf",id.clone()));
+    NamedFile::open(&path).map_err(|_| NotFound(format!("Bad document id: {}", id)))
+}
+
 #[post("/document/<id>", data = "<data>")]
 fn document_save(_c: State<View>, id: String, data: Form<_Document>) -> Redirect {
     let mut documents = _c.inner().models.lock().unwrap();
@@ -92,13 +103,13 @@ struct _Document {
     description: String,
 }
 
-#[post("/new", data = "<data>")]
-fn create(_c: State<View>, data: Form<_Document>) -> Redirect {
+#[post("/new", format = "multipart/form-data", data = "<data>")]
+fn create(_c: State<View>, data: Data) -> Redirect {
     let mut d = doc::Doc::new();
     let id = d.get_id();
-    d.set_title(data.title.clone());
-    d.set_description(data.description.clone());
+    d.set_title(id.clone());
     d.save();
+    io::copy(&mut data.open(), &mut d.add_attachment()).unwrap();
     _c.inner().models.lock().unwrap().add_document_to_catalog(d);
     Redirect::to(format!("/document/{}", id))
 }
@@ -125,7 +136,8 @@ fn main() {
                 document,
                 document_save,
                 documents,
-                folders
+                folders,
+                get_file
             ],
         )
         .mount("/document", routes![form, create])

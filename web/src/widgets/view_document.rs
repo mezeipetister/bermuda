@@ -61,6 +61,11 @@ impl Widget for Model {
 			    {navbar}
 			    <div class=\"row\">
 				<div class=\"col-sm\">
+				    <a href=\"/file/{id}\">View file</a>
+				</div>
+			    </div>
+			    <div class=\"row\">
+				<div class=\"col-sm\">
 				    <form method=\"POST\">
 					<div class=\"form-group\">
 					    <label for=\"title\">Documentum title</label>
@@ -82,7 +87,8 @@ impl Widget for Model {
             title = self.title,
             css = self.css,
             js = self.js,
-            navbar = widget_navbar::Model::new().render(),
+	    navbar = widget_navbar::Model::new().render(),
+	    id = self.document.get_id(),
             dtitle = self.document.get_title(),
             ddescription = self.document.get_description(),
         )

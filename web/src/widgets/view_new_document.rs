@@ -48,7 +48,7 @@ impl Model {
 }
 
 impl Widget for Model {
-    fn render(&self) -> String {
+    fn render(&self) -> String {      
         format!(
             "<!DOCTYPE html>
 		<html>
@@ -61,17 +61,9 @@ impl Widget for Model {
 			    {navbar}
 			    <div class=\"row\">
 				<div class=\"col-sm\">
-				    <form method=\"POST\">
-					<div class=\"form-group\">
-					    <label for=\"title\">Documentum title</label>
-					    <input type=\"text\" class=\"form-control\" id=\"title\" name=\"title\" aria-describedby=\"documentTitle\" placeholder=\"Enter document title\">
-					    <!-- <small id=\"emailHelp\" class=\"form-text text-muted\">We'll never share your email with anyone else.</small> -->
-					</div>
-					<div class=\"form-group\">
-					    <label for=\"description\">Description</label>
-					    <input type=\"text\" class=\"form-control\" name=\"description\" id=\"description\" placeholder=\"Document description\">
-					</div>
-					<button type=\"submit\" class=\"btn btn-primary\">Submit</button>
+				    <form method=\"POST\" class=\"box\" enctype=\"multipart/form-data\">
+					<input type=\"file\" name=\"file\" accept=\".pdf\"><br>
+					<button type=\"submit\">Upload</button>
 				    </form>
 				</div>
 			    </div>

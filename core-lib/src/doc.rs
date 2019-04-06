@@ -3,7 +3,11 @@
 use crate::files::*;
 // use crate::serde_yaml::*;
 // use std::fs::File; TODO: Remove it!
+use std::fs::File;
 use std::io;
+use std::io::Write;
+use std::path;
+use std::path::Path;
 // use std::path::Path; TODO: Remove it!
 
 /// Doc struct
@@ -37,6 +41,11 @@ impl Doc {
         .expect("Error while saving document to file.");
     }
 
+    // TODO: REFACT! JUST FOR TRIAl!
+    pub fn add_attachment(&self) -> File {
+        save_attachment(&self.id, &"INIT CONTENT".to_string())
+    }
+
     /// Get id as string
     pub fn get_id(&self) -> String {
         self.id.clone()
@@ -51,7 +60,7 @@ impl Doc {
     pub fn set_title(&mut self, new_title: String) {
         self.title = new_title;
     }
-    
+
     /// Get description as string
     pub fn get_description(&self) -> &String {
         &self.description
@@ -61,6 +70,20 @@ impl Doc {
     pub fn set_description(&mut self, new_description: String) {
         self.description = new_description;
     }
+}
+
+// TODO: REFACT! JUST FOR TRIAL!
+fn save_attachment(document_id: &String, content: &String) -> File {
+    let mut file = create_file_from_path(
+        &get_home_path()
+            .unwrap()
+            .join(".bermuda") // TODO:! Move path to settings!
+            .join("files") // TODO:! The same!
+            .join(format!("{}.pdf", document_id)), // TODO: Manage extensions!
+    )
+    .unwrap();
+    file.write(content.as_bytes());
+    file
 }
 
 // Save document to file
