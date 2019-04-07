@@ -71,10 +71,12 @@ impl Widget for Model {
 			<style>{css}</style>
 		    </head>
 		    <body>
-			<div class=\"container\">
 			    {navbar}
+			<div class=\"container-fluid\">
 			    <div class=\"row\">
-				<ul>{docs_list}</ul>
+				<div class=\"col-sm\">
+				    <ul>{docs_list}</ul>
+				</div>
 			    </div>
 			</div>
 			<script>{js}</script>

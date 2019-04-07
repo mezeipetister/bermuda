@@ -31,13 +31,15 @@ impl Catalog {
     /// Get Document by id
     /// Returns a result
     /// TODO: Check error handling!
-    pub fn get_document_by_id(&mut self, id: String) -> &mut Doc {
+    pub fn get_document_by_id(&mut self, id: String) -> Result<&mut Doc, ()> {
         let index = self
             .documents
             .iter()
-            .position(|doc| doc.get_id().clone() == id)
-            .unwrap();
-        &mut self.documents[index]
+            .position(|doc| doc.get_id().clone() == id);
+        match index {
+            Some(index) => Ok(&mut self.documents[index]),
+            None => Err(()),
+        }
     }
 }
 

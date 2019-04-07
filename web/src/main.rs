@@ -12,9 +12,9 @@ use core_lib::catalog;
 use core_lib::doc;
 use rocket::request::Form;
 use rocket::response::content;
-use rocket::response::Redirect;
 use rocket::response::status::NotFound;
 use rocket::response::NamedFile;
+use rocket::response::Redirect;
 use rocket::Data;
 use rocket::State;
 use std::io;
@@ -54,11 +54,17 @@ fn documents(_c: State<View>) -> content::Html<String> {
 
 #[get("/document/<id>")]
 fn document(_c: State<View>, id: String) -> content::Html<String> {
-    let mut a =
-        view_document::Model::new(&_c.inner().models.lock().unwrap().get_document_by_id(id));
-    a.set_title("Bermuda".to_string());
-    content::Html(a.render())
-    // content::Html(_c.inner().views.lock().unwrap().demo_document_plain_view())
+    let mut documents = _c.inner().models.lock().unwrap();
+    let res = documents.get_document_by_id(id.clone());
+
+    match res {
+        Ok(res) => {
+            let mut a = view_document::Model::new(res);
+            a.set_title("Bermuda".to_string());
+            content::Html(a.render())
+        }
+        Err(_) => content::Html("Error!".to_string()),
+    }
 }
 
 #[get("/file/<id>")]
@@ -67,18 +73,24 @@ fn get_file(_c: State<View>, id: String) -> Result<NamedFile, NotFound<String>> 
         .unwrap()
         .join(".bermuda")
         .join("files")
-        .join(format!("{}.pdf",id.clone()));
+        .join(format!("{}.pdf", id.clone()));
     NamedFile::open(&path).map_err(|_| NotFound(format!("Bad document id: {}", id)))
 }
 
 #[post("/document/<id>", data = "<data>")]
 fn document_save(_c: State<View>, id: String, data: Form<_Document>) -> Redirect {
     let mut documents = _c.inner().models.lock().unwrap();
-    let d = documents.get_document_by_id(id.clone());
-    d.set_title(data.title.clone());
-    d.set_description(data.description.clone());
-    d.save();
-    Redirect::to(format!("/document/{}", id))
+    let res = documents.get_document_by_id(id.clone());
+
+    match res {
+        Ok(d) => {
+            d.set_title(data.title.clone());
+            d.set_description(data.description.clone());
+            d.save();
+            Redirect::to(format!("/document/{}", id))
+        }
+        Err(_) => Redirect::to("/"), // TODO: Redirect tot 404! Once we have 404 available!;
+    }
 }
 
 #[get("/folders")]

@@ -51,8 +51,8 @@ impl Widget for Model {
 			<style>{css}</style>
 		    </head>
 		    <body>
-			<div class=\"container\">
 			    {navbar}
+			<div class=\"container\">
 			    <div class=\"row\">
 				<div class=\"col-sm text-center\">
 				    <h1>Bermuda</h1>
