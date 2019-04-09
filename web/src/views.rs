@@ -1,7 +1,3 @@
-pub trait Widget {
-    fn render(&self) -> String;
-}
-
 //     // Render HTML!
 //     pub fn render(&self) -> String {
 //         format!(

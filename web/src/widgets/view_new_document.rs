@@ -1,7 +1,6 @@
 // View Add Document
 
 use crate::catalog::Catalog;
-use crate::views::Widget;
 use crate::widgets::*;
 
 use core_lib::doc::Doc;

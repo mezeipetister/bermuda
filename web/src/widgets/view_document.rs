@@ -1,7 +1,6 @@
 // View Index
 
 use crate::doc::Doc;
-use crate::views::Widget;
 use crate::widgets::*;
 
 pub struct Model {

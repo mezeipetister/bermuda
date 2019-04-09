@@ -8,23 +8,19 @@ extern crate rocket;
 extern crate rocket_contrib;
 
 extern crate core_lib;
-use core_lib::catalog;
-use core_lib::doc;
+use core_lib::{catalog, doc};
 use rocket::request::Form;
-use rocket::response::content;
 use rocket::response::status::NotFound;
-use rocket::response::NamedFile;
-use rocket::response::Redirect;
-use rocket::Data;
-use rocket::State;
+use rocket::response::{content, NamedFile, Redirect};
+use rocket::{Data, State};
 use std::io;
 use std::sync::Mutex;
 
-use crate::views::Widget;
 use crate::widgets::*;
 
 #[get("/")]
 fn index(_c: State<View>) -> Redirect {
+    println!("Widget content: {}", widget_demo::new().render());
     Redirect::to("/documents")
 }
 
