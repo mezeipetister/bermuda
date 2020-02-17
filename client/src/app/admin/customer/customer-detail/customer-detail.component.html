@@ -1,0 +1,62 @@
+<section class="section">
+    <div class="container">
+        <h1 class="title">Vásárló</h1>
+        <form (ngSubmit)="customer.submit()" #loginForm="ngForm">
+            <error-display [model]="customer"></error-display>
+            <div class="field">
+                <label class="label">Felhasználó neve</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Példa Vásárló" name="name"
+                        [(ngModel)]="customer.data.name" required autofocus>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Adószám</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Adószám" name="taxnumber"
+                        [(ngModel)]="customer.data.tax_number">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Email cím</label>
+                <div class="control">
+                    <input class="input" type="email" placeholder="demo@demo.com" name="email"
+                        [(ngModel)]="customer.data.email">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Telefonszám</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Telefonszám" name="phone"
+                        [(ngModel)]="customer.data.phone" required>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Irányítószám</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Irányítószám" name="zip"
+                        [(ngModel)]="customer.data.address.zip" required>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Település</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Település" name="location"
+                        [(ngModel)]="customer.data.address.location" required>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Lakcím (Út)</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Út" name="address"
+                        [(ngModel)]="customer.data.address.address" required>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <button-submit [model]="customer"></button-submit>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
