@@ -24,13 +24,11 @@ extern crate rand;
 extern crate storaget;
 
 pub mod check;
-pub mod customer;
 pub mod email;
 pub mod error;
-pub mod issue;
+pub mod folder;
 pub mod login;
 pub mod model;
-pub mod notification;
 pub mod password;
 pub mod prelude;
 pub mod user;

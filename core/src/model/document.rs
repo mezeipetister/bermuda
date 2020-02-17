@@ -21,22 +21,40 @@ use serde::{Deserialize, Serialize};
 use storaget::*;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct Folder {
+pub struct Document {
     /**
-     * Unique ID
-     * Auto generated
+     * Unique ID    
      */
     id: String,
     /**
-     * Folder name
+     * Reference ID,
+     * use as you wish
+     * e.g.: invoice/contract reference ID
      */
-    name: String,
+    reference: String,
     /**
-     * Folder description
+     * Folder reference
+     */
+    folder_id: String,
+    /**
+     * Document title
+     */
+    title: String,
+    /**
+     * Short description
      */
     description: String,
     /**
-     * Created by userid
+     * Due date, e.g.: payment date for invoice,
+     * or due date for contract
+     */
+    due_date: Option<DateTime<Utc>>,
+    /**
+     * ID for enclosed document PDF
+     */
+    file_id: Option<String>,
+    /**
+     * Created by user
      */
     created_by: String,
     /**
@@ -51,22 +69,41 @@ pub struct Folder {
     is_active: bool,
 }
 
-impl Folder {
-    pub fn new(created_by: String, name: String, description: String) -> Self {
-        Folder {
+impl Document {
+    pub fn new(
+        created_by: String,
+        reference: String,
+        folder_id: String,
+        title: String,
+        description: String,
+    ) -> Self {
+        Document {
             id: generate_folder_id(),
-            name,
+            reference,
+            folder_id,
+            title,
             description,
+            due_date: None,
+            file_id: None,
             created_by,
             date_created: Utc::now(),
             is_active: true,
         }
     }
-    pub fn set_name(&mut self, name: String) {
-        self.name = name;
+    pub fn set_title(&mut self, title: String) {
+        self.title = title;
     }
     pub fn set_description(&mut self, description: String) {
         self.description = description;
+    }
+    pub fn set_folder(&mut self, folder_id: String) {
+        self.folder_id = folder_id;
+    }
+    pub fn set_file(&mut self, file_id: Option<String>) {
+        self.file_id = file_id;
+    }
+    pub fn set_due_date(&mut self, due_date: Option<DateTime<Utc>>) {
+        self.due_date = due_date;
     }
     pub fn remove(&mut self) {
         self.is_active = false;
@@ -76,7 +113,7 @@ impl Folder {
     }
 }
 
-impl StorageObject for Folder {
+impl StorageObject for Document {
     fn get_id(&self) -> &str {
         &self.id
     }

@@ -117,30 +117,9 @@ fn rocket(data: DataLoad) -> rocket::Rocket {
                 controller::profile::profile_get,
                 controller::profile::profile_post,
                 controller::profile::password_change,
-                controller::notification::notification_get,
-                controller::notification::notification_new_get,
-                controller::notification::notification_delete,
-                controller::notification::notification_seen,
-                controller::customer::customer_all_get,
-                controller::customer::customer_new_post,
-                controller::customer::customer_id_get,
-                controller::customer::customer_id_post,
                 controller::user::user_all_get,
                 controller::user::user_id_get,
                 controller::user::user_new_post,
-                controller::issue::user_new_put,
-                controller::issue::issue_all_get,
-                controller::issue::issue_id_get,
-                controller::issue::issue_id_follow_post,
-                controller::issue::issue_id_unfollow_post,
-                controller::issue::issue_id_assign_to_post,
-                controller::issue::issue_id_open_post,
-                controller::issue::issue_id_close_post,
-                controller::issue::issue_id_comment_post,
-                controller::issue::issue_id_comment_like_post,
-                controller::issue::issue_id_comment_dislike_post,
-                controller::issue::issue_id_label_add_post,
-                controller::issue::issue_id_label_remove_post,
             ],
         )
         .register(catchers![not_found, unauthorized, form_error])
@@ -148,17 +127,15 @@ fn rocket(data: DataLoad) -> rocket::Rocket {
 
 pub struct DataLoad {
     users: Storage<User>,
-    notifications: Storage<NotificationContainer>,
-    customers: Storage<Customer>,
-    issues: Storage<Issue>,
+    folders: Storage<Folder>,
+    documents: Storage<Document>,
 }
 
 fn main() -> StorageResult<()> {
     let data = DataLoad {
         users: Storage::load_or_init::<User>("data/users")?,
-        notifications: Storage::load_or_init::<NotificationContainer>("data/notifications")?,
-        customers: Storage::load_or_init::<Customer>("data/customers")?,
-        issues: Storage::load_or_init::<Issue>("data/issues")?,
+        folders: Storage::load_or_init::<Folder>("data/folders")?,
+        documents: Storage::load_or_init::<Document>("data/documents")?,
     };
     rocket(data).launch();
     Ok(())

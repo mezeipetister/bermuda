@@ -15,24 +15,15 @@
 // You should have received a copy of the GNU General Public License
 // along with GNStore.  If not, see <http://www.gnu.org/licenses/>.
 
-use chrono::prelude::*;
+use nanoid::nanoid;
 
-pub struct Cart {
-    id: String,
-    created_by: String,
-    date_created: DateTime<Utc>,
-    is_closed: bool,
-    item_count: usize,
-    cart_items: Vec<CartItem>,
-    total_net_price: usize,
-    total_gross_price: usize,
-    invoice: Option<String>,
-}
-
-pub struct CartItem {
-    product_id: String,
-    product_name: String,
-    piece: usize,
-    net_price: usize,
-    vat: usize,
+pub fn generate_folder_id() -> String {
+    nanoid!(
+        10,
+        &[
+            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
+            'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7',
+            '8', '9',
+        ]
+    )
 }

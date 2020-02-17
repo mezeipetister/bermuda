@@ -15,9 +15,9 @@
 // You should have received a copy of the GNU General Public License
 // along with GNStore.  If not, see <http://www.gnu.org/licenses/>.
 
-pub mod customer;
-pub mod issue;
+// pub mod customer;
+// pub mod issue;
 pub mod login;
-pub mod notification;
+// pub mod notification;
 pub mod profile;
 pub mod user;
