@@ -90,6 +90,9 @@ impl Document {
             is_active: true,
         }
     }
+    pub fn get_folder(&self) -> &str {
+        &self.folder_id
+    }
     pub fn set_title(&mut self, title: String) {
         self.title = title;
     }
