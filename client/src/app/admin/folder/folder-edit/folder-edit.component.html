@@ -1,0 +1,37 @@
+<section class="section">
+    <div class="container">
+        <h1 class="title">Mappa szerkesztés</h1>
+        <div class="columns">
+            <div class="column is-6">
+                <form #loginForm="ngForm" (ngSubmit)="submitName()">
+                    <div class="field">
+                        <label class="label">Mappa neve</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Példa mapp" name="foldername"
+                                [(ngModel)]="folder.name" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <button class="button" type="submit">Megváltoztat</button>
+                        </div>
+                    </div>
+                </form>
+                <form #loginForm="ngForm" (ngSubmit)="submitDescription()">
+                    <div class="field">
+                        <label class="label">Mappa leírása</label>
+                        <div class="control">
+                            <textarea name="folderdescription" [(ngModel)]="folder.description"
+                                class="textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <button class="button" type="submit">Megváltoztat</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
