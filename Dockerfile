@@ -32,7 +32,9 @@ RUN apt update
 RUN apt install libssl-dev -y
 RUN apt install nginx -y
 COPY nginx.conf /etc/nginx/conf.d/
+RUN rm /etc/nginx/sites-enabled/default
 COPY --from=client /app/dist /usr/share/nginx/html/
-RUN systemctl reload nginx
+RUN /etc/init.d/nginx stop
+RUN /etc/init.d/nginx start
 ENTRYPOINT ["./api"]
 EXPOSE 80/tcp
