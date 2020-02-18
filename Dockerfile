@@ -19,4 +19,4 @@ RUN apt update
 # Install libssl as dependency
 RUN apt install libssl-dev -y
 ENTRYPOINT ["./api"]
-EXPOSE 7000/tcp
+EXPOSE 8000/tcp
