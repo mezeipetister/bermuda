@@ -31,6 +31,7 @@ export class DocumentDetailComponent implements OnInit {
   }
 
   submit() {
+    this.document.due_date = new Date(this.document.due_date + " 12:00:00");
     this.http.post<Document>("/document/" + this.id, this.document).subscribe((val) => {
       this.document = val;
       alert("Sikeres mentés!");
