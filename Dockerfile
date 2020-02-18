@@ -2,10 +2,10 @@
 # Stage 1
 # Build the API
 # ====================
-FROM rustlang/rust:nightly AS api
-WORKDIR /app
-COPY . /app/
-RUN cargo build --bin api --release
+# FROM rustlang/rust:nightly AS api
+# WORKDIR /app
+# COPY . /app/
+# RUN cargo build --bin api --release
 
 # ====================
 # Stage 2
@@ -27,13 +27,17 @@ RUN ng build --outputPath=dist --prod --aot
 # ====================
 FROM ubuntu:latest AS api_server
 WORKDIR /app
-COPY --from=api /app/target/release/api ./
+# COPY --from=api /app/target/release/api ./
+COPY ./api ./
 RUN apt update
 RUN apt install libssl-dev -y
 RUN apt install nginx -y
 COPY nginx.conf /etc/nginx/conf.d/
 RUN rm /etc/nginx/sites-enabled/default
 COPY --from=client /app/dist /usr/share/nginx/html/
-CMD ["nginx", "-g", "daemon off;"]
-ENTRYPOINT ["./api"]
+COPY ./startup.sh /app/
+# CMD ["nginx", "-g", "daemon off;"]
+RUN chmod +x ./startup.sh
+CMD ./startup.sh
+# ENTRYPOINT ["./startup.sh"]
 EXPOSE 80/tcp
