@@ -1,0 +1,35 @@
+<section class="section">
+    <div class="container">
+        <div class="column is-6">
+            <h1 class="title">Új dokumentum</h1>
+            <form (ngSubmit)="submit()" #newCustomerForm="ngForm">
+                <div class="field">
+                    <label class="label">Dokumentum címe</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="demo_elek" name="title"
+                            [(ngModel)]="document.title" required autofocus>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Dokumentum leírása</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="demo_elek" name="description"
+                            [(ngModel)]="document.description">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Dokumentum hivatkozási szám</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="demo_elek" name="reference"
+                            [(ngModel)]="document.reference">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <button class="button" type="submit">Létrehozás</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

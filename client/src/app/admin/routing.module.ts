@@ -12,6 +12,8 @@ import { FolderComponent } from './folder/folder.component';
 import { FolderNewComponent } from './folder/folder-new/folder-new.component';
 import { FolderDetailComponent } from './folder/folder-detail/folder-detail.component';
 import { FolderEditComponent } from './folder/folder-edit/folder-edit.component';
+import { DocumentNewComponent } from './document/document-new/document-new.component';
+import { DocumentDetailComponent } from './document/document-detail/document-detail.component';
 
 const routes: Routes = [
   {
@@ -33,7 +35,17 @@ const routes: Routes = [
           { path: '', component: FolderComponent },
           { path: 'new', component: FolderNewComponent },
           { path: ':id', component: FolderDetailComponent },
-          { path: ':id/edit', component: FolderEditComponent }
+          { path: ':id/edit', component: FolderEditComponent },
+          { path: ':id/new', component: DocumentNewComponent }
+        ]
+      },
+      {
+        path: 'document', component: EmptyComponent, children: [
+          // { path: '', component: FolderComponent },
+          // { path: 'new', component: FolderNewComponent },
+          { path: ':id', component: DocumentDetailComponent },
+          // { path: ':id/edit', component: FolderEditComponent },
+          // { path: ':id/new', component: DocumentNewComponent }
         ]
       },
     ]

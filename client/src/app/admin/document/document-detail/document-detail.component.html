@@ -1,0 +1,47 @@
+<section class="section">
+    <div class="container">
+        <nav class="level">
+            <!-- Left side -->
+            <div class="level-left">
+                <div class="level-item">
+                    <p class="title">{{document.title}}</p>
+                </div>
+            </div>
+
+            <!-- Right side -->
+            <div class="level-right">
+                <p class="level-item">
+                    <button class="button" (click)="download()">Letöltés</button>
+                </p>
+            </div>
+        </nav>
+        <p class="subtitle">{{document.description}}</p>
+        <p class="content">Referencia: {{document.reference}}</p>
+        <p class="content">Határidő: -
+            <!-- <span *ngIf="document.due_date"></span>
+            <span *ngIf="!document.due_date">
+                <button class="button is-small">Határidő beállítása</button>
+            </span> -->
+        </p>
+        <p class="content">Csatolmány van?: {{document.file_id ? 'Van' : 'Még nincs csatolmány'}}</p>
+        <p class="content">Készítette: {{document.created_by}}</p>
+        <p class="content">Készült: {{document.date_created | date}}</p>
+        <form class="form" (submit)="documentUpload()">
+            <div class="file">
+                <label class="file-label">
+                    <input class="file-input" type="file" name="new_document" accept="application/pdf"
+                        (change)="onFileChange($event)">
+                    <span class="file-cta">
+                        <span class="file-icon">
+                            <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+                            Fájl kiválasztása
+                        </span>
+                    </span>
+                </label>
+            </div>
+            <button class="button" type="submit">Feltöltés</button>
+        </form>
+    </div>
+</section>

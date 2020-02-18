@@ -20,6 +20,7 @@ use crate::prelude::*;
 use crate::DataLoad;
 use chrono::prelude::*;
 use core_lib::model::*;
+use rocket::response::NamedFile;
 use rocket::Data;
 use rocket::State;
 use rocket_contrib::json::Json;
@@ -97,6 +98,25 @@ pub fn document_remove_post(
     }
 }
 
+#[post("/document/<id>", data = "<form>")]
+pub fn document_update_post(
+    _user: Login,
+    data: State<DataLoad>,
+    id: String,
+    form: Json<Document>,
+) -> Result<StatusOk<Document>, ApiError> {
+    match data.inner().documents.get_by_id(&id) {
+        Ok(document) => Ok(StatusOk(document.update(|f| {
+            f.set_title(form.get_title().to_string());
+            f.set_description(form.get_description().to_string());
+            f.set_reference(form.get_reference().to_string());
+            f.set_due_date(form.get_due_date());
+            f.clone()
+        }))),
+        Err(_) => Err(ApiError::NotFound),
+    }
+}
+
 #[post("/document/<id>/restore")]
 pub fn document_restore_post(
     _user: Login,
@@ -135,7 +155,7 @@ pub fn document_duedate_post(
 
 #[post(
     "/document/<id>/upload_file",
-    format = "multipart/form-data",
+    format = "application/pdf",
     data = "<file>"
 )]
 pub fn document_upload_file_post(
@@ -144,7 +164,11 @@ pub fn document_upload_file_post(
     id: String,
     data: State<DataLoad>,
 ) -> Result<StatusOk<Document>, ApiError> {
-    match file.stream_to_file(Path::new(&format!("data/file/{}.pdf", &id))) {
+    let fname = format!("data/file/{}.pdf", &id);
+    std::fs::create_dir_all("data/file");
+    let path = Path::new(&fname);
+    std::fs::File::create(path);
+    match file.stream_to_file(&path) {
         Ok(_) => match data.inner().documents.get_by_id(&id) {
             Ok(document) => Ok(StatusOk(document.update(|d| {
                 d.set_file(Some(id.clone()));
@@ -152,6 +176,14 @@ pub fn document_upload_file_post(
             }))),
             Err(_) => Err(ApiError::NotFound),
         },
-        Err(_) => Err(ApiError::NotFound),
+        Err(msg) => Err(ApiError::InternalError(format!("{}", msg))),
+    }
+}
+
+#[get("/file/<id>")]
+pub fn document_file_get(_user: Login, id: String) -> Result<NamedFile, ApiError> {
+    match NamedFile::open(&format!("data/file/{}.pdf", id)) {
+        Ok(f) => Ok(f),
+        Err(msg) => Err(ApiError::InternalError(format!("{}", msg))),
     }
 }

@@ -132,7 +132,9 @@ fn rocket(data: DataLoad) -> rocket::Rocket {
                 controller::document::document_id_get,
                 controller::document::document_remove_post,
                 controller::document::document_restore_post,
+                controller::document::document_update_post,
                 controller::document::document_upload_file_post,
+                controller::document::document_file_get
             ],
         )
         .register(catchers![not_found, unauthorized, form_error])

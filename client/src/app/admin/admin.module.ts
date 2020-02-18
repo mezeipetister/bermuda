@@ -17,6 +17,8 @@ import { FolderComponent } from './folder/folder.component';
 import { FolderNewComponent } from './folder/folder-new/folder-new.component';
 import { FolderDetailComponent } from './folder/folder-detail/folder-detail.component';
 import { FolderEditComponent } from './folder/folder-edit/folder-edit.component';
+import { DocumentNewComponent } from './document/document-new/document-new.component';
+import { DocumentDetailComponent } from './document/document-detail/document-detail.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { FolderEditComponent } from './folder/folder-edit/folder-edit.component'
     FolderNewComponent,
     FolderDetailComponent,
     FolderEditComponent,
+    DocumentNewComponent,
+    DocumentDetailComponent,
   ],
   imports: [
     CommonModule,

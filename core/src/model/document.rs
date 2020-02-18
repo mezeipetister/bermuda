@@ -93,11 +93,23 @@ impl Document {
     pub fn get_folder(&self) -> &str {
         &self.folder_id
     }
+    pub fn get_title(&self) -> &str {
+        &self.title
+    }
     pub fn set_title(&mut self, title: String) {
         self.title = title;
     }
     pub fn set_description(&mut self, description: String) {
         self.description = description;
+    }
+    pub fn get_description(&self) -> &str {
+        &self.description
+    }
+    pub fn set_reference(&mut self, reference: String) {
+        self.reference = reference;
+    }
+    pub fn get_reference(&self) -> &str {
+        &self.reference
     }
     pub fn set_folder(&mut self, folder_id: String) {
         self.folder_id = folder_id;
@@ -107,6 +119,9 @@ impl Document {
     }
     pub fn set_due_date(&mut self, due_date: Option<DateTime<Utc>>) {
         self.due_date = due_date;
+    }
+    pub fn get_due_date(&self) -> Option<DateTime<Utc>> {
+        self.due_date
     }
     pub fn remove(&mut self) {
         self.is_active = false;
