@@ -14,10 +14,10 @@ RUN cargo build --bin api --release
 FROM node:alpine3.11 as client
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
-COPY client/package.json /app/package.json
+COPY client/package.json /app/
 RUN npm install
 RUN npm install -g @angular/cli
-COPY ./client/*.* /app
+COPY ./client/ /app/
 
 RUN ng build --outputPath=dist --prod --aot
 
@@ -27,14 +27,12 @@ RUN ng build --outputPath=dist --prod --aot
 # ====================
 FROM ubuntu:latest AS api_server
 WORKDIR /app
-COPY --from=api /app/target/release/api .
-# update for future dep install
+COPY --from=api /app/target/release/api ./
 RUN apt update
-# Install libssl as dependency
 RUN apt install libssl-dev -y
 RUN apt install nginx -y
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=client /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/
+COPY --from=client /app/dist /usr/share/nginx/html/
 RUN systemctl reload nginx
 ENTRYPOINT ["./api"]
 EXPOSE 80/tcp

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { Page1Component as AdminPage1 } from './page1/page1.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AuthGuard } from '../guard/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
