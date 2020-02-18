@@ -123,6 +123,9 @@ impl Document {
     pub fn get_due_date(&self) -> Option<DateTime<Utc>> {
         self.due_date
     }
+    pub fn is_active(&self) -> bool {
+        self.is_active
+    }
     pub fn remove(&mut self) {
         self.is_active = false;
     }

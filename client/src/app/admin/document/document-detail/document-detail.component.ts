@@ -18,7 +18,9 @@ export class DocumentDetailComponent implements OnInit {
   constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.http.get<Document>("/document/" + this.id).subscribe((val) => this.document = val);
+    this.http.get<Document>("/document/" + this.id).subscribe((val) => {
+      this.document = val;
+    });
   }
 
   onFileChange(event) {
@@ -28,8 +30,19 @@ export class DocumentDetailComponent implements OnInit {
     }
   }
 
+  submit() {
+    this.http.post<Document>("/document/" + this.id, this.document).subscribe((val) => {
+      this.document = val;
+      alert("Sikeres mentés!");
+    });
+  }
+
   download() {
     this.http.get("/file/" + this.id, { responseType: 'blob' }).subscribe((data) => window.open(URL.createObjectURL(data)));
+  }
+
+  remove() {
+    this.http.post<Document>("/document/" + this.id + "/remove", []).subscribe((val) => this.document = val);
   }
 
   documentUpload() {

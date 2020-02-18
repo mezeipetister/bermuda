@@ -38,7 +38,7 @@ pub fn document_all_get(
         .inner()
         .documents
         .into_iter()
-        .filter(|d| d.get(|c| c.get_folder() == &folder_id))
+        .filter(|d| d.get(|c| c.get_folder() == &folder_id && c.is_active()))
         .map(|d| d.get(|c| c.clone()))
         .collect::<Vec<Document>>();
     Ok(StatusOk(res))

@@ -36,7 +36,8 @@
             <tbody>
                 <tr *ngFor="let document of documents; index as i;">
                     <td>{{i + 1}}</td>
-                    <td><button class="button is-small" (click)="download(document.id)">Letöltés</button></td>
+                    <td><button class="button is-small" (click)="download(document.id)"
+                            *ngIf="document.file_id">Letöltés</button></td>
                     <td>
                         <a [routerLink]="['/document/', document.id]">
                             {{document.title}}
