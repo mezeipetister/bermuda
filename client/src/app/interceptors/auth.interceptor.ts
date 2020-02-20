@@ -17,7 +17,8 @@ export class AuthInterceptor implements HttpInterceptor {
         // cloned headers, updated with the authorization.
         const authReq = req.clone({
             // Set dev API url in DEV mode
-            url: (environment.production ? '/api' : 'http://localhost:7000/api') + req.url,
+            // TODO: remove condition
+            url: (environment.production ? '/api' : '/api') + req.url,
             headers: req.headers.set('Token', authToken.ok ? authToken.unwrap() : '')
         });
 

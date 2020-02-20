@@ -40,7 +40,7 @@
                             *ngIf="document.file_id">Letöltés</button></td>
                     <td>
                         <a [routerLink]="['/document/', document.id]">
-                            {{document.title}}
+                            {{document.title || '[névtelen dokumentum]'}}
                         </a>
                     </td>
                     <td class="is-narrow">{{document.due_date | date}}</td>
