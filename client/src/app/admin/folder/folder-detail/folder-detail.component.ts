@@ -23,12 +23,9 @@ export class FolderDetailComponent implements OnInit {
   }
 
   download(id) {
+    let w = window.open();
     this.http.get("/file/" + id, { responseType: 'blob' }).subscribe((data) => {
-      var reader = new FileReader();
-      reader.onloadend = function (e) {
-        window.open().location.href = reader.result as string;
-      }
-      reader.readAsDataURL(new Blob([data], { type: 'application/pdf' }));
+      w.location.href = URL.createObjectURL(new Blob([data], { type: 'application/pdf' }));
     });
   }
 
