@@ -17,6 +17,7 @@
 
 pub mod document;
 pub mod folder;
+pub mod history;
 pub mod user;
 
 pub use document::*;

@@ -1433,9 +1433,9 @@ checksum = "7345c971d1ef21ffdbd103a75990a15eb03604fc8b8852ca8cb418ee1a099028"
 
 [[package]]
 name = "storaget"
-version = "0.5.0"
+version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7c3e8dbf6ba0bcd599b5ac0fb3d2b3c91b9eb31b63450ebd58500bfa545af769"
+checksum = "297c23e26c7467787ab4d2146c72d513539c7623539593f5ac243d11a013651f"
 dependencies = [
  "chrono",
  "rand 0.7.3",

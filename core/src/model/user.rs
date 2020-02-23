@@ -263,8 +263,15 @@ impl User {
 // }
 
 impl StorageObject for User {
+    type ResultType = User;
     fn get_id(&self) -> &str {
         &self.id
+    }
+    fn try_from(from: &str) -> StorageResult<Self::ResultType> {
+        match deserialize_object(from) {
+            Ok(res) => Ok(res),
+            Err(_) => Err(Error::DeserializeError("user has wrong format".to_string())),
+        }
     }
 }
 

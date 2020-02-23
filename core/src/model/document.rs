@@ -135,7 +135,16 @@ impl Document {
 }
 
 impl StorageObject for Document {
+    type ResultType = Document;
     fn get_id(&self) -> &str {
         &self.id
+    }
+    fn try_from(from: &str) -> StorageResult<Self::ResultType> {
+        match deserialize_object(from) {
+            Ok(res) => Ok(res),
+            Err(_) => Err(Error::DeserializeError(
+                "document has wrong format".to_string(),
+            )),
+        }
     }
 }

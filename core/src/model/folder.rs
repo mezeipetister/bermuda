@@ -16,6 +16,7 @@
 // along with Bermuda.  If not, see <http://www.gnu.org/licenses/>.
 
 use crate::folder::*;
+use crate::model::history::folder::folder0::Folder0;
 use chrono::prelude::*;
 use serde::{Deserialize, Serialize};
 use storaget::*;
@@ -77,7 +78,27 @@ impl Folder {
 }
 
 impl StorageObject for Folder {
+    type ResultType = Folder;
     fn get_id(&self) -> &str {
         &self.id
+    }
+    fn try_from(from: &str) -> StorageResult<Self::ResultType> {
+        match deserialize_object(from) {
+            Ok(res) => Ok(res),
+            Err(_) => Ok(Folder0::try_from(from)?.into()),
+        }
+    }
+}
+
+impl From<Folder0> for Folder {
+    fn from(from: Folder0) -> Self {
+        Folder {
+            id: from.id,
+            name: from.title,
+            description: from.description,
+            created_by: from.created_by,
+            date_created: from.date_created,
+            is_active: from.is_active,
+        }
     }
 }
