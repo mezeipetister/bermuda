@@ -1,0 +1,38 @@
+                                    Bermuda
+                               DEV documentation
+
+                                 by Peter Mezei
+                                 Copyright 2020
+
+
+Table of content
+
+    1.  Design
+    1.1 Task management
+
+
+1.  Design
+
+    1.1 Task management
+    
+        Purposes: storing tasks and managing due dates. One document can have
+        many due dates. Direct tasks, such as payment due, or contract
+        validation date, or several meeting dates per invitation letter.
+
+        One solution can be using a multy purpose "attache" like method,
+        attaching task/duedate/... to a document. Each kind of item should have
+        the same interface, so on system wide we could use the provided
+        information.
+
+        Where should we use these information?
+         ||||
+         ||||
+         |||*------ Global due date view displaying all the comming due dates
+         |||        and events.
+         |||
+         ||*------- Tasks / assignments per user 
+         ||
+         |*-------- Tasks / project
+         |
+         *--------- Task progress track
+                    e.g.: New, In progress, Done states per task
