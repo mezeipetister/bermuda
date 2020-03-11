@@ -1,0 +1,303 @@
+%!PS-Adobe-3.0
+%%Title: DEV
+%%For: peter
+%%Creator: VIM - Vi IMproved 8.0 (2016 Sep 12)
+%%CreationDate: Wed Mar 11 14:16:44 2020
+%%DocumentData: Clean8Bit
+%%Orientation: Portrait
+%%Pages: (atend)
+%%PageOrder: Ascend
+%%BoundingBox: 59 49 564 800
+%%DocumentMedia: A4 595 842 0 () ()
+%%DocumentNeededResources: font Courier
+%%+ font Courier-Bold
+%%+ font Courier-Oblique
+%%+ font Courier-BoldOblique
+%%DocumentSuppliedResources: procset VIM-Prolog 1.4 1
+%%+ encoding VIM-latin1 1.0 0
+%%Requirements: duplex collate
+%%EndComments
+%%BeginDefaults
+%%PageResources: font Courier
+%%+ font Courier-Bold
+%%+ font Courier-Oblique
+%%+ font Courier-BoldOblique
+%%PageMedia: A4
+%%EndDefaults
+%%BeginProlog
+%%BeginResource: procset VIM-Prolog
+%%BeginDocument: /usr/share/vim/vim80/print/prolog.ps
+%!PS-Adobe-3.0 Resource-ProcSet
+%%Title: VIM-Prolog
+%%Version: 1.4 1
+%%EndComments
+% Editing of this file is NOT RECOMMENDED.  You run a very good risk of causing
+% all PostScript printing from VIM failing if you do.  PostScript is not called
+% a write-only language for nothing!
+/packedarray where not{userdict begin/setpacking/pop load def/currentpacking
+false def end}{pop}ifelse/CP currentpacking def true setpacking
+/bd{bind def}bind def/ld{load def}bd/ed{exch def}bd/d/def ld
+/db{dict begin}bd/cde{currentdict end}bd
+/T true d/F false d
+/SO null d/sv{/SO save d}bd/re{SO restore}bd
+/L2 systemdict/languagelevel 2 copy known{get exec}{pop pop 1}ifelse 2 ge d
+/m/moveto ld/s/show ld /ms{m s}bd /g/setgray ld/r/setrgbcolor ld/sp{showpage}bd
+/gs/gsave ld/gr/grestore ld/cp/currentpoint ld
+/ul{gs UW setlinewidth cp UO add 2 copy newpath m 3 1 roll add exch lineto
+stroke gr}bd
+/bg{gs r cp BO add 4 -2 roll rectfill gr}bd
+/sl{90 rotate 0 exch translate}bd
+L2{
+/sspd{mark exch{setpagedevice}stopped cleartomark}bd
+/nc{1 db/NumCopies ed cde sspd}bd
+/sps{3 db/Orientation ed[3 1 roll]/PageSize ed/ImagingBBox null d cde sspd}bd
+/dt{2 db/Tumble ed/Duplex ed cde sspd}bd
+/c{1 db/Collate ed cde sspd}bd
+}{
+/nc{/#copies ed}bd
+/sps{statusdict/setpage get exec}bd
+/dt{statusdict/settumble 2 copy known{get exec}{pop pop pop}ifelse
+statusdict/setduplexmode 2 copy known{get exec}{pop pop pop}ifelse}bd
+/c{pop}bd
+}ifelse
+/ffs{findfont exch scalefont d}bd/sf{setfont}bd
+/ref{1 db findfont dup maxlength dict/NFD ed{exch dup/FID ne{exch NFD 3 1 roll
+put}{pop pop}ifelse}forall/Encoding findresource dup length 256 eq{NFD/Encoding
+3 -1 roll put}{pop}ifelse NFD dup/FontType get 3 ne{/CharStrings}{/CharProcs}
+ifelse 2 copy known{2 copy get dup maxlength dict copy[/questiondown/space]{2
+copy known{2 copy get 2 index/.notdef 3 -1 roll put pop exit}if pop}forall put
+}{pop pop}ifelse dup NFD/FontName 3 -1 roll put NFD definefont pop end}bd
+CP setpacking
+(\004)cvn{}bd
+% vim:ff=unix:
+%%EOF
+%%EndDocument
+%%EndResource
+%%BeginResource: encoding VIM-latin1
+%%BeginDocument: /usr/share/vim/vim80/print/latin1.ps
+%!PS-Adobe-3.0 Resource-Encoding
+%%Title: VIM-latin1
+%%Version: 1.0 0
+%%EndComments
+/VIM-latin1[
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quotesingle
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash
+/zero /one /two /three /four /five /six /seven
+/eight /nine /colon /semicolon /less /equal /greater /question
+/at /A /B /C /D /E /F /G
+/H /I /J /K /L /M /N /O
+/P /Q /R /S /T /U /V /W
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore
+/grave /a /b /c /d /e /f /g
+/h /i /j /k /l /m /n /o
+/p /q /r /s /t /u /v /w
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /periodcentered
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis]
+/Encoding defineresource pop
+% vim:ff=unix:
+%%EOF
+%%EndDocument
+%%EndResource
+%%EndProlog
+%%BeginSetup
+595 842 0 sps
+1 nc
+T F dt
+T c
+%%IncludeResource: font Courier
+/_F0 /VIM-latin1 /Courier ref
+/F0 10 /_F0 ffs
+%%IncludeResource: font Courier-Bold
+/_F1 /VIM-latin1 /Courier-Bold ref
+/F1 10 /_F1 ffs
+%%IncludeResource: font Courier-Oblique
+/_F2 /VIM-latin1 /Courier-Oblique ref
+/F2 10 /_F2 ffs
+%%IncludeResource: font Courier-BoldOblique
+/_F3 /VIM-latin1 /Courier-BoldOblique ref
+/F3 10 /_F3 ffs
+/UO -1 d
+/UW 0.5 d
+/BO -2.5 d
+%%EndSetup
+%%Page: 1 1
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(DEV[+]                                                                        Page 1)59.5 792.4 ms
+F0 sf
+(                                    Bermuda)59.5 772.4 ms
+(                               DEV documentation)59.5 762.4 ms
+(                                 by Peter Mezei)59.5 742.4 ms
+(                                 Copyright 2020)59.5 732.4 ms
+(Table of content)59.5 702.4 ms
+(    0.      Backlog)59.5 682.4 ms
+(            -----------------------------------)59.5 672.4 ms
+(    1.      Design)59.5 662.4 ms
+(            -----------------------------------)59.5 652.4 ms
+(    1.1     Task management)59.5 642.4 ms
+(    1.2     New document\(s\) disovery)59.5 632.4 ms
+(    1.3     File hierarchy)59.5 622.4 ms
+(                                      ***)59.5 602.4 ms
+(0.  Backlog)59.5 582.4 ms
+(    v0.2)59.5 562.4 ms
+(        File upload)59.5 542.4 ms
+(        File download)59.5 522.4 ms
+(        File drop area)59.5 502.4 ms
+(        Multiple file upload)59.5 482.4 ms
+(        File upload status indicator)59.5 462.4 ms
+(        Download file indicator)59.5 442.4 ms
+(            Visually display download status and then open the downloaded file.)59.5 422.4 ms
+(            In Angular currently we are downloading the file and then open it as)59.5 412.4 ms
+(            a BLOB. But when the file size is too big, and/or the connection)59.5 402.4 ms
+(            download speed it not suitable, then after clicking the download)59.5 392.4 ms
+(            buttin, we have a white empty page till BLOB loads.)59.5 382.4 ms
+(            It would be better to dipslay a status indicator displaying  a)59.5 362.4 ms
+(            progress bar with value [0,100]. Once it's value increase 100%, then)59.5 352.4 ms
+(            open the BLOB.)59.5 342.4 ms
+(        \f)59.5 322.4 ms
+(        Upload just PDF)59.5 312.4 ms
+(            Restrict users upload just PDF files. In this way we cannot use)59.5 292.4 ms
+(            source files, or we neet to separate the upload process into two)59.5 282.4 ms
+(            processes: File and soruce file upload.)59.5 272.4 ms
+(            Also possible:)59.5 252.4 ms
+(                - Upload just PDFs)59.5 232.4 ms
+(                - Upload PDFs and source files but in different channels)59.5 222.4 ms
+(                - Upload PDFs and source files. If I drop a source file \(WITH NO)59.5 212.4 ms
+(                  PDF EXTENSION\) it should automatically upload as a source)59.5 202.4 ms
+(                  file, and PDF extension should upload as a FILE.)59.5 192.4 ms
+(        Upload file source file)59.5 172.4 ms
+(        Store original file name)59.5 152.4 ms
+(            In version 0.1 we rename the uploaded files to the Bermuda FILE)59.5 132.4 ms
+(            OBJECT ID. We use this ID to store the file and to enclose to the)59.5 122.4 ms
+(            FILE OBJECT. It would better to reserve the original file name at)59.5 112.4 ms
+(            least as a meta data. File name may contains specific meta data such)59.5 102.4 ms
+(            as version numbers, team or organisation flags, that could be useful)59.5 92.4 ms
+(            information checking the available file VERSIONS.)59.5 82.4 ms
+(        File VERSION)59.5 62.4 ms
+re sp
+%%PageTrailer
+%%Page: 2 2
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(DEV[+]                                                                        Page 2)59.5 792.4 ms
+F0 sf
+(            It's possible to store multiple version of a file enclosed. The)59.5 772.4 ms
+(            latest is the actual working file, but under a history section all)59.5 762.4 ms
+(            the uploads \(file name, who was the uploader and when, and a link to)59.5 752.4 ms
+(            that version\). It's like never remove, just overwrite, and store all)59.5 742.4 ms
+(            the changes.)59.5 732.4 ms
+(        Auto convert plain text file formats to PDF)59.5 712.4 ms
+(        Duedate to files)59.5 692.4 ms
+(        Owner to files)59.5 672.4 ms
+(        Task\(s\) to files)59.5 652.4 ms
+(        Readme markdown to folder)59.5 632.4 ms
+(        Folder LOCK)59.5 612.4 ms
+(1.  Design)59.5 592.4 ms
+(    1.1 Task management)59.5 572.4 ms
+(    )59.5 562.4 ms
+(        Purposes: storing tasks and managing due dates. One document can have)59.5 552.4 ms
+(        many due dates. Direct tasks, such as payment due, or contract)59.5 542.4 ms
+(        validation date, or several meeting dates per invitation letter.)59.5 532.4 ms
+(        One solution can be using a multy purpose "attache" like method,)59.5 512.4 ms
+(        attaching task/duedate/... to a document. Each kind of item should have)59.5 502.4 ms
+(        the same interface, so on system wide we could use the provided)59.5 492.4 ms
+(        information.)59.5 482.4 ms
+(        Where should we use these information?)59.5 462.4 ms
+(         ||||)59.5 452.4 ms
+(         ||||)59.5 442.4 ms
+(         |||*------ Global due date view displaying all the comming due dates)59.5 432.4 ms
+(         |||        and events.)59.5 422.4 ms
+(         |||)59.5 412.4 ms
+(         ||*------- Tasks / assignments per user )59.5 402.4 ms
+(         ||)59.5 392.4 ms
+(         |*-------- Displaying tasks per project / folder)59.5 382.4 ms
+(         |)59.5 372.4 ms
+(         *--------- Task progress track statistics)59.5 362.4 ms
+(                    e.g.: New, In progress, Done states per task)59.5 352.4 ms
+(        Task should have:)59.5 332.4 ms
+(            0.  Owner)59.5 312.4 ms
+(            1.  Due date\(s\))59.5 302.4 ms
+(            2.  Status)59.5 292.4 ms
+(            3.  History?)59.5 282.4 ms
+(            4.  Description)59.5 272.4 ms
+(        Fears)59.5 252.4 ms
+(            *   Task really should have duedate? Or it should be optional?)59.5 232.4 ms
+(            *   Status should be a process or rather a bool type?)59.5 222.4 ms
+(            *   Task maybe should be as small as it can: short description +)59.5 212.4 ms
+(                is_done)59.5 202.4 ms
+(            *   Does it necessary to have owner and assigned to at the same)59.5 192.4 ms
+(            time? Or a created_by and assigned_to is enough? Or should we)59.5 182.4 ms
+(        have all the three? Or owner should be dynamic using like)59.5 172.4 ms
+(        assigned to?)59.5 162.4 ms
+(    1.2 New document\(s\) discovery)59.5 142.4 ms
+(        View of new documents. A kind of summary view, to quickly overview what)59.5 122.4 ms
+(        happened and what new documents we have. It should display document)59.5 112.4 ms
+(        title, maybe description short version, task\(s\), due date\(s\), owner,)59.5 102.4 ms
+(        assigned user, uploader user.)59.5 92.4 ms
+(        Possible issues)59.5 72.4 ms
+(            *   Visibility. What happens when we have a large active user base.)59.5 52.4 ms
+re sp
+%%PageTrailer
+%%Page: 3 3
+%%BeginPageSetup
+sv
+0 g
+F0 sf
+%%EndPageSetup
+F1 sf
+(DEV[+]                                                                        Page 3)59.5 792.4 ms
+F0 sf
+(                Everybody shoulld see all the new documents? All the documents)59.5 772.4 ms
+(                should be opened and transparent for everybody?)59.5 762.4 ms
+(            *   Large number of new documents. Should we display each new)59.5 742.4 ms
+(                documents to the users? Is it usefull to display a large set of)59.5 732.4 ms
+(                documents to the users?)59.5 722.4 ms
+(            *   Priority. Can we somehow organize the new documents to display)59.5 702.4 ms
+(                the important ones? Important to who?)59.5 692.4 ms
+(            *   Display what? Just the new documents or document updates?)59.5 672.4 ms
+(    1.3 File hierarchy)59.5 652.4 ms
+(        The degree of freedom of using folders and filed to organize information)59.5 632.4 ms
+(        can be complex. It's a question what does create more value: limit the)59.5 622.4 ms
+(        possibilities of using folders in hierarchy and force the user to use a)59.5 612.4 ms
+(        "clean" flat design, or let the users to put folders and documents to)59.5 602.4 ms
+(        everywhere.)59.5 592.4 ms
+(        To force a flat design seems to be suitable but wihtout any evidence.)59.5 572.4 ms
+(2.  Prototypes)59.5 542.4 ms
+(    File)59.5 522.4 ms
+(    ----------------------------------------------------)59.5 502.4 ms
+(    | File name)59.5 492.4 ms
+(    | Tasks t/d     )59.5 482.4 ms
+(    ----------------------------------------------------)59.5 472.4 ms
+re sp
+%%PageTrailer
+%%Trailer
+%%Pages: 3
+%%EOF
+

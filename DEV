@@ -7,9 +7,134 @@
 
 Table of content
 
-    1.  Design
-    1.1 Task management
+    0.      Backlog
+            -----------------------------------
+    1.      Design
+            -----------------------------------
+    1.1     Task management
+    1.2     New document(s) disovery
+    1.3     File hierarchy
 
+                                      ***
+
+0.  Backlog
+
+    v0.2
+
+        File upload
+
+            Basic functionality to upload file to a FILE OBJECT. Further
+            questions do relate to the further DEV ideas.
+
+        File download
+
+            Basic functionality to download available file. Using the WEB
+            interface; after download process does finish, it should open the
+            file via the default APP, or via the BROWSER (pdf).
+
+            When we use PDF, browser should be fine as as default PDF viewer.
+            Almost all the mobile and desktop platform have PDF support.
+
+            Opening source file is an OPEN question.
+
+        File drop area
+
+            Dropzone to drop file(s). Mainly in the WEB interface. Drop file(s)
+            and starts upload process.
+
+        Multiple file upload
+
+            Ability to upload multiple files in the same time. With dropzone,
+            the ability to drag and drop multiple files to a dropzone and upload
+            them together - but in different upload process with a different
+            upload progress bar. It can make upload process faster - overall.
+
+        File upload status indicator
+
+            When uploading file(s) we should dipslay a progress bar per file
+            upload process; displaying the progress percentage. It may help
+            users to identify how long the upload process takes - as estimated -
+            and why they should not worry about the idle time.
+
+            When the upload process takes longer time, and there is not status
+            indication, it can be confusing to decide wheter the process takes
+            long, or something bad happened and use action needed.
+
+        Download file indicator
+
+            Visually display download status and then open the downloaded file.
+            In Angular currently we are downloading the file and then open it as
+            a BLOB. But when the file size is too big, and/or the connection
+            download speed it not suitable, then after clicking the download
+            buttin, we have a white empty page till BLOB loads.
+
+            It would be better to dipslay a status indicator displaying  a
+            progress bar with value [0,100]. Once it's value increase 100%, then
+            open the BLOB.
+
+        Upload just PDF
+
+            Restrict users upload just PDF files. In this way we cannot use
+            source files, or we neet to separate the upload process into two
+            processes: File and soruce file upload.
+
+            Also possible:
+
+                - Upload just PDFs
+                - Upload PDFs and source files but in different channels
+                - Upload PDFs and source files. If I drop a source file (WITH NO
+                  PDF EXTENSION) it should automatically upload as a source
+                  file, and PDF extension should upload as a FILE.
+
+        Upload file source file
+
+            Being able to upload source file next to a PDF. A source file is a
+            secondary attachement, when a file is created then we can upload
+            source file that should be the source of the file. It should be
+            exactly the same file but SOURCE, or it could by anything - but
+            mainly the SOURCE.
+
+            It is also interesting to do it as a reverse; uploading a source
+            file and auto GENERATE a PDF from it.
+
+            e.g.:
+
+            1. Upload readme.md - and attach it as a source
+            |
+            *------> 2. Generating readme.pdf - and attach it as  PDF
+                |
+                |
+                *------ LINK the PDF and the source together 
+                        ‾‾‾‾
+
+        Store original file name
+
+            In version 0.1 we rename the uploaded files to the Bermuda FILE
+            OBJECT ID. We use this ID to store the file and to enclose to the
+            FILE OBJECT. It would better to reserve the original file name at
+            least as a meta data. File name may contains specific meta data such
+            as version numbers, team or organisation flags, that could be useful
+            information checking the available file VERSIONS.
+
+        File VERSION
+
+            It's possible to store multiple version of a file enclosed. The
+            latest is the actual working file, but under a history section all
+            the uploads (file name, who was the uploader and when, and a link to
+            that version). It's like never remove, just overwrite, and store all
+            the changes.
+
+        Auto convert plain text file formats to PDF
+
+        Duedate to files
+
+        Owner to files
+
+        Task(s) to files
+
+        Readme markdown to folder
+
+        Folder LOCK
 
 1.  Design
 
@@ -32,7 +157,68 @@ Table of content
          |||
          ||*------- Tasks / assignments per user 
          ||
-         |*-------- Tasks / project
+         |*-------- Displaying tasks per project / folder
          |
-         *--------- Task progress track
+         *--------- Task progress track statistics
                     e.g.: New, In progress, Done states per task
+
+        Task should have:
+
+            0.  Owner
+            1.  Due date(s)
+            2.  Status
+            3.  History?
+            4.  Description
+
+        Fears
+
+            *   Task really should have duedate? Or it should be optional?
+            *   Status should be a process or rather a bool type?
+            *   Task maybe should be as small as it can: short description +
+                is_done
+            *   Does it necessary to have owner and assigned to at the same
+	    	time? Or a created_by and assigned_to is enough? Or should we
+		have all the three? Or owner should be dynamic using like
+		assigned to?
+
+    1.2 New document(s) discovery
+
+        View of new documents. A kind of summary view, to quickly overview what
+        happened and what new documents we have. It should display document
+        title, maybe description short version, task(s), due date(s), owner,
+        assigned user, uploader user.
+
+        Possible issues
+
+            *   Visibility. What happens when we have a large active user base.
+                Everybody shoulld see all the new documents? All the documents
+                should be opened and transparent for everybody?
+
+            *   Large number of new documents. Should we display each new
+                documents to the users? Is it usefull to display a large set of
+                documents to the users?
+
+            *   Priority. Can we somehow organize the new documents to display
+                the important ones? Important to who?
+
+            *   Display what? Just the new documents or document updates?
+
+    1.3 File hierarchy
+
+        The degree of freedom of using folders and filed to organize information
+        can be complex. It's a question what does create more value: limit the
+        possibilities of using folders in hierarchy and force the user to use a
+        "clean" flat design, or let the users to put folders and documents to
+        everywhere.
+
+        To force a flat design seems to be suitable but wihtout any evidence.
+
+
+2.  Prototypes
+
+    File
+
+    ----------------------------------------------------
+    | File name
+    | Tasks t/d     
+    ----------------------------------------------------
