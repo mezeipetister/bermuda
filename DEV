@@ -161,13 +161,52 @@ Table of content
         
         Duedate to files
 
+            Set a duedate to a file. Payment duedate to invoice, or legal
+            obligation dates. There are several questions:
+
+                * Should we manage only one duedate or multiple?
+                * Should we manage duedate as a part of a task? 
+
         Owner to files
+
+            Set an owner to a file. Or multiple owners? Or its enough to use a
+            created_by metadata and using ASSIGNED_TO and SUBSCRIBERs?
 
         Task(s) to files
 
+            Set a TASK object to a file. The idea is to take multiple tasks to a
+            FILE OBJECT and managing the document LIFE CYCLE usings tasks. E.g.:
+            Print, Send to sign, payment, re-sign it, missing data.
+
+            Another idea is to use TAGS for the above examples, e.g. using
+            toPrint! or Printed tags.
+
         Readme markdown to folder
 
+            Dedicated readme file per folder. If there is any readme, README,
+            readme.txt, readme.md, etc... then it would be used as a readme
+            FILE. It would display as highlighted block of the folder.
+
+            It would be the part of the project, using all the same tools and
+            methods, such as updateing, meta data, tasks, etc... but would be
+            dipslayed as a FOLDER COVER.
+
+            Similar to the one that is used by GitHub.
+
         Folder LOCK
+
+            When closing a folder, in practical it would mean that we have an
+            option to virtually close / LOCK the folder. It would mean a WRITE
+            LOCK, so a LOCKED folder would remain UNCHANGED. There would be no
+            way to modify a LOCKED folder.
+
+            It would be a tool that could grant consistent information over
+            time. Although a folder or it content is safe from deletion, and all
+            the changes are versioned, but after an unwanted change, it would
+            require targeted investigation what and how changed overtime.
+
+            Using LOCK it would grant, that a LOCKED folder remain exactly the
+            same over times.
 
 1.  Design
 
