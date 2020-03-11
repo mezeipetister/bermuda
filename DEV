@@ -228,6 +228,25 @@ Table of content
             Using LOCK it would grant, that a LOCKED folder remain exactly the
             same over times.
 
+        Symlink
+
+            Symlink a file from a folder to another one. In this way when we
+            have a file stored in a folder, it could be used virtually to
+            symlink to another target folder; the original file would remain in
+            its target folder, but in the other folder it would be easily
+            accessable, it would be clear that that file is a SYMLINK, and also
+            would be clear the origin of the SYMLINKED file.
+
+            It would be usefull when we have a folder to store all the incoming
+            invoices, but we would also SYMLINK the invoices to their project
+            folder. E.g.: we have a project where we have all the contracts,
+            etc... and here we put a SYMLINK of the related invoce. The invoice
+            physically is in another accounting folder, and the digital version
+            also placed in the accounting folder, so its available for the local
+            authorities to check anytime, but the file itself as a digital copy
+            is SYMLINKED to the project folder; so its easily available to check
+            the project status anytime.
+
 1.  Design
 
     1.1 Task management
