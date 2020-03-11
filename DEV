@@ -181,6 +181,26 @@ Table of content
             Another idea is to use TAGS for the above examples, e.g. using
             toPrint! or Printed tags.
 
+        Tags
+
+            Using tags in the way we use colored stickers on papers. E.g.:
+
+                toPrint!    => document should be printed ASAP
+                Printed     => document has printed
+                SignIt      => document is unsigned, it should be signed ASAP
+                COPY        => document is a copy
+                Original!   => we need to replace it with the original one ASAP
+
+        History
+
+            Storing all the changes in a easily human readable format like a
+            history. e.g.:
+
+            * JohnDoe added a tag 'toPrint!'
+            * JohnDoe renamed the document to 'NewName'
+            * JohnDoe added a new task '9001'
+            * JohnDoe uploaded a new source 'NewSource.txt'
+
         Readme markdown to folder
 
             Dedicated readme file per folder. If there is any readme, README,
