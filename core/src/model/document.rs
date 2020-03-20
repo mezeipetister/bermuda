@@ -69,6 +69,18 @@ pub struct Document {
     is_active: bool,
 }
 
+impl Default for Document {
+    fn default() -> Self {
+        Document::new(
+            "".to_string(),
+            "".to_string(),
+            "".to_string(),
+            "".to_string(),
+            "".to_string(),
+        )
+    }
+}
+
 impl Document {
     pub fn new(
         created_by: String,
@@ -134,17 +146,8 @@ impl Document {
     }
 }
 
-impl StorageObject for Document {
-    type ResultType = Document;
+impl VecPackMember for Document {
     fn get_id(&self) -> &str {
         &self.id
-    }
-    fn try_from(from: &str) -> StorageResult<Self::ResultType> {
-        match deserialize_object(from) {
-            Ok(res) => Ok(res),
-            Err(_) => Err(Error::DeserializeError(
-                "document has wrong format".to_string(),
-            )),
-        }
     }
 }

@@ -62,17 +62,13 @@ impl From<&User> for Profile {
 
 #[get("/profile")]
 pub fn profile_get(user: Login, data: State<DataLoad>) -> Result<StatusOk<Profile>, ApiError> {
-    match user::get_user_by_id(&data.inner().users, &user.userid()) {
-        Ok(usr) => {
-            let profile = usr.get(|user| -> Profile { user.into() });
-            return Ok(StatusOk(profile));
-        }
-        Err(_) => {
-            return Err(ApiError::InternalError(
-                "A felhasználó nem található.".to_owned(),
-            ))
-        }
-    };
+    if let Ok(usr) = data.inner().users.lock().unwrap().find_id(&user.userid()) {
+        return Ok(StatusOk((&**usr).into()));
+    } else {
+        return Err(ApiError::InternalError(
+            "A felhasználó nem található.".to_owned(),
+        ));
+    }
 }
 
 #[post("/profile", data = "<form>")]
@@ -81,22 +77,25 @@ pub fn profile_post(
     data: State<DataLoad>,
     form: Json<Profile>,
 ) -> Result<StatusOk<Profile>, ApiError> {
-    match user::get_user_by_id(&data.inner().users, &user.userid()) {
-        Ok(usr) => {
-            let result = usr.update(|user| -> AppResult<User> {
-                user.set_user_name(form.name.clone())?;
-                user.set_user_email(form.email.clone())?;
-                user.set_user_phone(form.phone.clone())?;
-                Ok(user.clone())
-            })?;
-            return Ok(StatusOk((&result).into()));
-        }
-        Err(_) => {
-            return Err(ApiError::InternalError(
-                "A felhasználó nem található.".to_owned(),
-            ))
-        }
-    };
+    if let Ok(usr) = data
+        .inner()
+        .users
+        .lock()
+        .unwrap()
+        .find_id_mut(&user.userid())
+    {
+        let result = usr.update(|user| -> AppResult<User> {
+            user.set_user_name(form.name.clone())?;
+            user.set_user_email(form.email.clone())?;
+            user.set_user_phone(form.phone.clone())?;
+            Ok(user.clone())
+        })??;
+        return Ok(StatusOk((&result).into()));
+    } else {
+        return Err(ApiError::InternalError(
+            "A felhasználó nem található.".to_owned(),
+        ));
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -124,9 +123,16 @@ pub fn password_change(
             "A két jelszó nem egyezik meg egymással".to_owned(),
         ));
     }
-    match user::get_user_by_id(&data.inner().users, &user.userid()) {
-        Ok(usr) => usr.update(|u| u.set_password(password1.clone()))?,
-        Err(_) => return Err(ApiError::InternalError("Azonosítási hiba".to_owned())),
+    if let Ok(usr) = data
+        .inner()
+        .users
+        .lock()
+        .unwrap()
+        .find_id_mut(&user.userid())
+    {
+        usr.as_mut().set_password(password1.clone())?;
+        return Ok(StatusOk(()));
+    } else {
+        return Err(ApiError::InternalError("Azonosítási hiba".to_owned()));
     }
-    Ok(StatusOk(()))
 }

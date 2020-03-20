@@ -31,6 +31,8 @@ pub fn folder_all_get(
     let res = data
         .inner()
         .folders
+        .lock()
+        .unwrap()
         .into_iter()
         .map(|d| d.get(|c| c.clone()))
         .collect::<Vec<Folder>>();
@@ -54,7 +56,13 @@ pub fn folder_new_put(
         form.name.clone(),
         form.description.clone(),
     );
-    match data.inner().folders.add_to_storage(folder_new.clone()) {
+    match data
+        .inner()
+        .folders
+        .lock()
+        .unwrap()
+        .insert(folder_new.clone())
+    {
         Ok(_) => return Ok(StatusOk(folder_new)),
         Err(err) => return Err(err.into()),
     }
@@ -66,8 +74,8 @@ pub fn folder_id_get(
     data: State<DataLoad>,
     id: String,
 ) -> Result<StatusOk<Folder>, ApiError> {
-    match data.inner().folders.get_by_id(&id) {
-        Ok(folder) => Ok(StatusOk(folder.clone_data())),
+    match data.inner().folders.lock().unwrap().find_id(&id) {
+        Ok(folder) => Ok(StatusOk((*folder).clone())),
         Err(_) => Err(ApiError::NotFound),
     }
 }
@@ -84,11 +92,11 @@ pub fn folder_rename_post(
     id: String,
     form: Json<FolderNewName>,
 ) -> Result<StatusOk<Folder>, ApiError> {
-    match data.inner().folders.get_by_id(&id) {
+    match data.inner().folders.lock().unwrap().find_id_mut(&id) {
         Ok(folder) => Ok(StatusOk(folder.update(|f| {
             f.set_name(form.name.clone());
             f.clone()
-        }))),
+        })?)),
         Err(_) => Err(ApiError::NotFound),
     }
 }
@@ -105,11 +113,11 @@ pub fn folder_redescription_post(
     id: String,
     form: Json<FolderNewDescription>,
 ) -> Result<StatusOk<Folder>, ApiError> {
-    match data.inner().folders.get_by_id(&id) {
+    match data.inner().folders.lock().unwrap().find_id_mut(&id) {
         Ok(folder) => Ok(StatusOk(folder.update(|f| {
             f.set_description(form.description.clone());
             f.clone()
-        }))),
+        })?)),
         Err(_) => Err(ApiError::NotFound),
     }
 }
@@ -120,11 +128,11 @@ pub fn folder_remove_post(
     data: State<DataLoad>,
     id: String,
 ) -> Result<StatusOk<Folder>, ApiError> {
-    match data.inner().folders.get_by_id(&id) {
+    match data.inner().folders.lock().unwrap().find_id_mut(&id) {
         Ok(folder) => Ok(StatusOk(folder.update(|f| {
             f.remove();
             f.clone()
-        }))),
+        })?)),
         Err(_) => Err(ApiError::NotFound),
     }
 }
@@ -135,11 +143,11 @@ pub fn folder_restore_post(
     data: State<DataLoad>,
     id: String,
 ) -> Result<StatusOk<Folder>, ApiError> {
-    match data.inner().folders.get_by_id(&id) {
+    match data.inner().folders.lock().unwrap().find_id_mut(&id) {
         Ok(folder) => Ok(StatusOk(folder.update(|f| {
             f.restore();
             f.clone()
-        }))),
+        })?)),
         Err(_) => Err(ApiError::NotFound),
     }
 }

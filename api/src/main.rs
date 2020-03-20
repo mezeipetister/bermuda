@@ -41,11 +41,11 @@ pub mod prelude;
 use crate::prelude::*;
 use core_lib::model::*;
 use guard::*;
-use rocket::response::NamedFile;
 use rocket::Request;
 use rocket_cors::AllowedHeaders;
 use serde::Serialize;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
+use std::sync::Mutex;
 use storaget::*;
 
 #[get("/")]
@@ -141,16 +141,16 @@ fn rocket(data: DataLoad) -> rocket::Rocket {
 }
 
 pub struct DataLoad {
-    users: Storage<User>,
-    folders: Storage<Folder>,
-    documents: Storage<Document>,
+    users: Mutex<VecPack<User>>,
+    folders: Mutex<VecPack<Folder>>,
+    documents: Mutex<VecPack<Document>>,
 }
 
-fn main() -> StorageResult<()> {
+fn main() -> PackResult<()> {
     let data = DataLoad {
-        users: Storage::load_or_init::<User>("data/users")?,
-        folders: Storage::load_or_init::<Folder>("data/folders")?,
-        documents: Storage::load_or_init::<Document>("data/documents")?,
+        users: Mutex::new(VecPack::load_or_init(PathBuf::from("data/users"))?),
+        folders: Mutex::new(VecPack::load_or_init(PathBuf::from("data/folders"))?),
+        documents: Mutex::new(VecPack::load_or_init(PathBuf::from("data/documents"))?),
     };
     rocket(data).launch();
     Ok(())

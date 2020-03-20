@@ -37,6 +37,8 @@ pub fn document_all_get(
     let res = data
         .inner()
         .documents
+        .lock()
+        .unwrap()
         .into_iter()
         .filter(|d| d.get(|c| c.get_folder() == &folder_id && c.is_active()))
         .map(|d| d.get(|c| c.clone()))
@@ -65,7 +67,13 @@ pub fn document_new_put(
         form.title.clone(),
         form.description.clone(),
     );
-    match data.inner().documents.add_to_storage(document_new.clone()) {
+    match data
+        .inner()
+        .documents
+        .lock()
+        .unwrap()
+        .insert(document_new.clone())
+    {
         Ok(_) => return Ok(StatusOk(document_new)),
         Err(err) => return Err(err.into()),
     }
@@ -77,8 +85,8 @@ pub fn document_id_get(
     data: State<DataLoad>,
     id: String,
 ) -> Result<StatusOk<Document>, ApiError> {
-    match data.inner().documents.get_by_id(&id) {
-        Ok(document) => Ok(StatusOk(document.clone_data())),
+    match data.inner().documents.lock().unwrap().find_id(&id) {
+        Ok(document) => Ok(StatusOk((*document).clone())),
         Err(_) => Err(ApiError::NotFound),
     }
 }
@@ -89,11 +97,11 @@ pub fn document_remove_post(
     data: State<DataLoad>,
     id: String,
 ) -> Result<StatusOk<Document>, ApiError> {
-    match data.inner().documents.get_by_id(&id) {
+    match data.inner().documents.lock().unwrap().find_id_mut(&id) {
         Ok(document) => Ok(StatusOk(document.update(|f| {
             f.remove();
             f.clone()
-        }))),
+        })?)),
         Err(_) => Err(ApiError::NotFound),
     }
 }
@@ -105,14 +113,14 @@ pub fn document_update_post(
     id: String,
     form: Json<Document>,
 ) -> Result<StatusOk<Document>, ApiError> {
-    match data.inner().documents.get_by_id(&id) {
+    match data.inner().documents.lock().unwrap().find_id_mut(&id) {
         Ok(document) => Ok(StatusOk(document.update(|f| {
             f.set_title(form.get_title().to_string());
             f.set_description(form.get_description().to_string());
             f.set_reference(form.get_reference().to_string());
             f.set_due_date(form.get_due_date());
             f.clone()
-        }))),
+        })?)),
         Err(_) => Err(ApiError::NotFound),
     }
 }
@@ -123,11 +131,11 @@ pub fn document_restore_post(
     data: State<DataLoad>,
     id: String,
 ) -> Result<StatusOk<Document>, ApiError> {
-    match data.inner().documents.get_by_id(&id) {
+    match data.inner().documents.lock().unwrap().find_id_mut(&id) {
         Ok(document) => Ok(StatusOk(document.update(|f| {
             f.restore();
             f.clone()
-        }))),
+        })?)),
         Err(_) => Err(ApiError::NotFound),
     }
 }
@@ -144,11 +152,11 @@ pub fn document_duedate_post(
     id: String,
     form: Json<DocumentNewDuedate>,
 ) -> Result<StatusOk<Document>, ApiError> {
-    match data.inner().documents.get_by_id(&id) {
+    match data.inner().documents.lock().unwrap().find_id_mut(&id) {
         Ok(document) => Ok(StatusOk(document.update(|f| {
             f.set_due_date(form.due_date);
             f.clone()
-        }))),
+        })?)),
         Err(_) => Err(ApiError::NotFound),
     }
 }
@@ -169,11 +177,11 @@ pub fn document_upload_file_post(
     let path = Path::new(&fname);
     std::fs::File::create(path);
     match file.stream_to_file(&path) {
-        Ok(_) => match data.inner().documents.get_by_id(&id) {
+        Ok(_) => match data.inner().documents.lock().unwrap().find_id_mut(&id) {
             Ok(document) => Ok(StatusOk(document.update(|d| {
                 d.set_file(Some(id.clone()));
                 d.clone()
-            }))),
+            })?)),
             Err(_) => Err(ApiError::NotFound),
         },
         Err(msg) => Err(ApiError::InternalError(format!("{}", msg))),

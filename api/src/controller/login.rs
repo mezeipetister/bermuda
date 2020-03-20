@@ -60,7 +60,7 @@ pub fn post(
     }
 
     // User exist
-    if let Ok(user) = &data.inner().users.get_by_id(&username) {
+    if let Ok(user) = data.inner().users.lock().unwrap().find_id(&username) {
         let hash = user.get(|u| u.get_password_hash().to_owned());
         let res = password::verify_password_from_hash(&password, &hash)?;
         if res {
@@ -89,21 +89,14 @@ pub fn reset_password(
         None => return Err(ApiError::BadRequest("Hiányzó email cím".to_owned())),
     };
 
-    let user = match user::get_user_by_email(&data.inner().users, email) {
-        Ok(user) => user,
-        Err(_) => {
-            return Err(ApiError::BadRequest(
-                "A felhasználó nem található".to_owned(),
-            ))
-        }
-    };
-
-    match &user.update(|u| u.reset_password()) {
-        Ok(()) => return Ok(StatusAccepted(())),
-        Err(_) => {
-            return Err(ApiError::InternalError(
-                "Hiba az új jelszó beállításánál".to_owned(),
-            ))
-        }
-    };
+    if let Ok(user) =
+        user::get_user_by_email(data.inner().users.lock().unwrap().as_vec_mut(), email)
+    {
+        user.as_mut().reset_password()?;
+    } else {
+        return Err(ApiError::BadRequest(
+            "A felhasználó nem található".to_owned(),
+        ));
+    }
+    Ok(StatusAccepted(()))
 }

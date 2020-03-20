@@ -52,6 +52,12 @@ pub struct Folder {
     is_active: bool,
 }
 
+impl Default for Folder {
+    fn default() -> Self {
+        Folder::new("".to_string(), "".to_string(), "".to_string())
+    }
+}
+
 impl Folder {
     pub fn new(created_by: String, name: String, description: String) -> Self {
         Folder {
@@ -77,16 +83,9 @@ impl Folder {
     }
 }
 
-impl StorageObject for Folder {
-    type ResultType = Folder;
+impl VecPackMember for Folder {
     fn get_id(&self) -> &str {
         &self.id
-    }
-    fn try_from(from: &str) -> StorageResult<Self::ResultType> {
-        match deserialize_object(from) {
-            Ok(res) => Ok(res),
-            Err(_) => Ok(Folder0::try_from(from)?.into()),
-        }
     }
 }
 
