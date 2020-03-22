@@ -1,5 +1,0 @@
-export SMTP_FROM_EMAIL=mezeipetister@gmail.com
-export SMTP_SERVER_DOMAIN=smtp.gmail.com
-export SMTP_USERNAME=mezeipetister@gmail.com
-export SMTP_PASSWORD=oqefmmolrewjupyr
-export ROCKET_SECRET_KEY=AOSqISFLJ55Vw36Jn1nrvXHqRpJsJoDvoGzYcpX7fFY=
