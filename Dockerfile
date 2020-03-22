@@ -18,5 +18,6 @@ COPY --from=api_builder /app/target/release/api .
 RUN apt update
 # Install libssl as dependency
 RUN apt install libssl-dev -y
+RUN apt install curl -y
 ENTRYPOINT ["./api"]
 EXPOSE 8000/tcp

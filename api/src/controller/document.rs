@@ -27,6 +27,7 @@ use rocket_contrib::json::Json;
 use serde::{Deserialize, Serialize};
 use std::io;
 use std::path::Path;
+use storaget::Pack;
 
 #[get("/document/<folder_id>/all")]
 pub fn document_all_get(
@@ -39,8 +40,8 @@ pub fn document_all_get(
         .documents
         .lock()
         .unwrap()
-        .into_iter()
-        .filter(|d| d.get(|c| c.get_folder() == &folder_id && c.is_active()))
+        .iter()
+        .filter(|d: &&Pack<Document>| d.get(|c| c.get_folder() == &folder_id && c.is_active()))
         .map(|d| d.get(|c| c.clone()))
         .collect::<Vec<Document>>();
     Ok(StatusOk(res))

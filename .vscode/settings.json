@@ -1,5 +1,6 @@
 {
     "licenser.author": "Peter Mezei",
     "licenser.license": "GPLv2",
-    "licenser.projectName": "Bermuda"
+    "licenser.projectName": "Bermuda",
+    "rust-analyzer.updates.channel": "nightly"
 }
