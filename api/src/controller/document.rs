@@ -142,7 +142,7 @@ pub fn document_restore_post(
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct DocumentNewDuedate {
-    due_date: Option<DateTime<Utc>>,
+    due_date: Option<NaiveDate>,
 }
 
 #[post("/document/<id>/due_date", data = "<form>")]

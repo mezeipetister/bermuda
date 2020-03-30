@@ -16,6 +16,7 @@
 // along with Bermuda.  If not, see <http://www.gnu.org/licenses/>.
 
 use crate::folder::*;
+use crate::model::version::document::v1;
 use chrono::prelude::*;
 use serde::{Deserialize, Serialize};
 use storaget::*;
@@ -48,7 +49,7 @@ pub struct Document {
      * Due date, e.g.: payment date for invoice,
      * or due date for contract
      */
-    pub due_date: Option<DateTime<Utc>>,
+    pub due_date: Option<NaiveDate>,
     /**
      * ID for enclosed document PDF
      */
@@ -110,6 +111,27 @@ impl VecPackMember for Document {
     }
 }
 
+impl From<v1::Document> for Document {
+    fn from(from: v1::Document) -> Self {
+        Document {
+            id: from.id,
+            reference: from.reference,
+            folder_id: from.folder_id,
+            title: from.title,
+            description: from.description,
+            due_date: if let Some(ddate) = from.due_date {
+                Some(ddate.naive_local().date())
+            } else {
+                None
+            },
+            file_id: from.file_id,
+            created_by: from.created_by,
+            date_created: from.date_created,
+            is_active: from.is_active,
+        }
+    }
+}
+
 impl TryFrom for Document {
-    type TryFrom = Document;
+    type TryFrom = v1::Document;
 }

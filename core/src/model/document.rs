@@ -15,31 +15,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Bermuda.  If not, see <http://www.gnu.org/licenses/>.
 
-use crate::folder::*;
-pub use crate::model::version::document::v1::Document;
+pub use crate::model::version::document::v2::Document;
 use chrono::prelude::*;
 
 impl Document {
-    pub fn new(
-        created_by: String,
-        reference: String,
-        folder_id: String,
-        title: String,
-        description: String,
-    ) -> Self {
-        Document {
-            id: generate_folder_id(),
-            reference,
-            folder_id,
-            title,
-            description,
-            due_date: None,
-            file_id: None,
-            created_by,
-            date_created: Utc::now(),
-            is_active: true,
-        }
-    }
     pub fn get_folder(&self) -> &str {
         &self.folder_id
     }
@@ -67,10 +46,10 @@ impl Document {
     pub fn set_file(&mut self, file_id: Option<String>) {
         self.file_id = file_id;
     }
-    pub fn set_due_date(&mut self, due_date: Option<DateTime<Utc>>) {
+    pub fn set_due_date(&mut self, due_date: Option<NaiveDate>) {
         self.due_date = due_date;
     }
-    pub fn get_due_date(&self) -> Option<DateTime<Utc>> {
+    pub fn get_due_date(&self) -> Option<NaiveDate> {
         self.due_date
     }
     pub fn is_active(&self) -> bool {
