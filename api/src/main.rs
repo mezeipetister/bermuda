@@ -148,9 +148,9 @@ pub struct DataLoad {
 
 fn main() -> PackResult<()> {
     let data = DataLoad {
-        users: Mutex::new(VecPack::load_or_init(PathBuf::from("data/users"))?),
-        folders: Mutex::new(VecPack::load_or_init(PathBuf::from("data/folders"))?),
-        documents: Mutex::new(VecPack::load_or_init(PathBuf::from("data/documents"))?),
+        users: Mutex::new(VecPack::try_load_or_init(PathBuf::from("data/users"))?),
+        folders: Mutex::new(VecPack::try_load_or_init(PathBuf::from("data/folders"))?),
+        documents: Mutex::new(VecPack::try_load_or_init(PathBuf::from("data/documents"))?),
     };
     rocket(data).launch();
     Ok(())

@@ -16,70 +16,8 @@
 // along with Bermuda.  If not, see <http://www.gnu.org/licenses/>.
 
 use crate::folder::*;
+pub use crate::model::version::document::v1::Document;
 use chrono::prelude::*;
-use serde::{Deserialize, Serialize};
-use storaget::*;
-
-#[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct Document {
-    /**
-     * Unique ID    
-     */
-    id: String,
-    /**
-     * Reference ID,
-     * use as you wish
-     * e.g.: invoice/contract reference ID
-     */
-    reference: String,
-    /**
-     * Folder reference
-     */
-    folder_id: String,
-    /**
-     * Document title
-     */
-    title: String,
-    /**
-     * Short description
-     */
-    description: String,
-    /**
-     * Due date, e.g.: payment date for invoice,
-     * or due date for contract
-     */
-    due_date: Option<DateTime<Utc>>,
-    /**
-     * ID for enclosed document PDF
-     */
-    file_id: Option<String>,
-    /**
-     * Created by user
-     */
-    created_by: String,
-    /**
-     * Date created
-     */
-    date_created: DateTime<Utc>,
-    /**
-     * Logical delete option
-     * If its deleted its value false
-     * otherwise its true
-     */
-    is_active: bool,
-}
-
-impl Default for Document {
-    fn default() -> Self {
-        Document::new(
-            "".to_string(),
-            "".to_string(),
-            "".to_string(),
-            "".to_string(),
-            "".to_string(),
-        )
-    }
-}
 
 impl Document {
     pub fn new(
@@ -143,11 +81,5 @@ impl Document {
     }
     pub fn restore(&mut self) {
         self.is_active = true;
-    }
-}
-
-impl VecPackMember for Document {
-    fn get_id(&self) -> &str {
-        &self.id
     }
 }

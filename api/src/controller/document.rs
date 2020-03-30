@@ -25,7 +25,6 @@ use rocket::Data;
 use rocket::State;
 use rocket_contrib::json::Json;
 use serde::{Deserialize, Serialize};
-use std::io;
 use std::path::Path;
 use storaget::Pack;
 
@@ -174,9 +173,17 @@ pub fn document_upload_file_post(
     data: State<DataLoad>,
 ) -> Result<StatusOk<Document>, ApiError> {
     let fname = format!("data/file/{}.pdf", &id);
-    std::fs::create_dir_all("data/file");
+    if std::fs::create_dir_all("data/file").is_err() {
+        return Err(ApiError::InternalError(
+            "Hiba a file feldolgozása során".to_string(),
+        ));
+    }
     let path = Path::new(&fname);
-    std::fs::File::create(path);
+    if std::fs::File::create(path).is_err() {
+        return Err(ApiError::InternalError(
+            "Hiba a file feldolgozása során".to_string(),
+        ));
+    }
     match file.stream_to_file(&path) {
         Ok(_) => match data.inner().documents.lock().unwrap().find_id_mut(&id) {
             Ok(document) => Ok(StatusOk(document.update(|d| {

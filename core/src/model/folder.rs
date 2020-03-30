@@ -16,47 +16,8 @@
 // along with Bermuda.  If not, see <http://www.gnu.org/licenses/>.
 
 use crate::folder::*;
-use crate::model::history::folder::folder0::Folder0;
+pub use crate::model::version::folder::v2::Folder;
 use chrono::prelude::*;
-use serde::{Deserialize, Serialize};
-use storaget::*;
-
-#[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct Folder {
-    /**
-     * Unique ID
-     * Auto generated
-     */
-    id: String,
-    /**
-     * Folder name
-     */
-    name: String,
-    /**
-     * Folder description
-     */
-    description: String,
-    /**
-     * Created by userid
-     */
-    created_by: String,
-    /**
-     * Date created
-     */
-    date_created: DateTime<Utc>,
-    /**
-     * Logical delete option
-     * If its deleted its value false
-     * otherwise its true
-     */
-    is_active: bool,
-}
-
-impl Default for Folder {
-    fn default() -> Self {
-        Folder::new("".to_string(), "".to_string(), "".to_string())
-    }
-}
 
 impl Folder {
     pub fn new(created_by: String, name: String, description: String) -> Self {
@@ -80,24 +41,5 @@ impl Folder {
     }
     pub fn restore(&mut self) {
         self.is_active = true;
-    }
-}
-
-impl VecPackMember for Folder {
-    fn get_id(&self) -> &str {
-        &self.id
-    }
-}
-
-impl From<Folder0> for Folder {
-    fn from(from: Folder0) -> Self {
-        Folder {
-            id: from.id,
-            name: from.title,
-            description: from.description,
-            created_by: from.created_by,
-            date_created: from.date_created,
-            is_active: from.is_active,
-        }
     }
 }
